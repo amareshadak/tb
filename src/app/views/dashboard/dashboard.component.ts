@@ -2,237 +2,56 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'dashboard.component.html',
+  providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
+  constructor(public datepipe: DatePipe) { }
 
-  radioModel: string = 'Month';
-
-  // lineChart1
-  public lineChart1Data: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 40 - 5,
-          max: 84 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart1Colours: Array<any> = [
-    {
-      backgroundColor: getStyle('--primary'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart1Legend = false;
-  public lineChart1Type = 'line';
-
-  // lineChart2
-  public lineChart2Data: Array<any> = [
-    {
-      data: [1, 18, 9, 17, 34, 22, 11],
-      label: 'Series A'
-    }
-  ];
-  public lineChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart2Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 1 - 5,
-          max: 34 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        tension: 0.00001,
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart2Colours: Array<any> = [
-    { // grey
-      backgroundColor: getStyle('--info'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart2Legend = false;
-  public lineChart2Type = 'line';
-
-
-  // lineChart3
-  public lineChart3Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart3Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart3Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart3Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-    }
-  ];
-  public lineChart3Legend = false;
-  public lineChart3Type = 'line';
-
-
-  // barChart1
-  public barChart1Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public barChart1Labels: Array<any> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
-  public barChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        barPercentage: 0.6,
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    legend: {
-      display: false
-    }
-  };
-  public barChart1Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderWidth: 0
-    }
-  ];
-  public barChart1Legend = false;
-  public barChart1Type = 'bar';
+  // tslint:disable-next-line:max-line-length
+  chartData: Array<any> = [{'id': '1554878886230', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888043666', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888250690', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888369789', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888387324', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888744742', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888807296', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '300', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888863491', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '100', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888921884', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '23'}, {'id': '1554914618467', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554951699518', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554955211318', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554969840225', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554970508651', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999945638', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999947349', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}];
 
   // mainChart
 
-  public mainChartElements = 27;
+  public mainChartElements: number;
   public mainChartData1: Array<number> = [];
   public mainChartData2: Array<number> = [];
   public mainChartData3: Array<number> = [];
+  public mainChartData4: Array<number> = [];
+  public mainChartData5: Array<number> = [];
+  public mainChartData6: Array<number> = [];
 
   public mainChartData: Array<any> = [
     {
       data: this.mainChartData1,
-      label: 'Current'
+      label: 'T1'
     },
     {
       data: this.mainChartData2,
-      label: 'Previous'
+      label: 'T2'
     },
     {
       data: this.mainChartData3,
-      label: 'BEP'
+      label: 'T3'
+    },
+    {
+      data: this.mainChartData4,
+      label: 'T4'
+    },
+    {
+      data: this.mainChartData5,
+      label: 'T5'
+    },
+    {
+      data: this.mainChartData6,
+      label: 'T6'
     }
   ];
   /* tslint:disable:max-line-length */
-  public mainChartLabels: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public mainChartLabels: Array<string> = []; // = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   /* tslint:enable:max-line-length */
   public mainChartOptions: any = {
     tooltips: {
@@ -255,8 +74,9 @@ export class DashboardComponent implements OnInit {
           drawOnChartArea: false,
         },
         ticks: {
-          callback: function(value: any) {
-            return value.charAt(0);
+          callback: function(value: number) {
+            return value;
+            // return  this.datepipe.transform(this.date, 'yyyy-MM-dd');
           }
         }
       }],
@@ -264,14 +84,14 @@ export class DashboardComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 5),
-          max: 250
+          stepSize: Math.ceil(250 / 6),
+          max: 500
         }
       }]
     },
     elements: {
       line: {
-        borderWidth: 2
+        borderWidth: 1
       },
       point: {
         radius: 0,
@@ -281,109 +101,67 @@ export class DashboardComponent implements OnInit {
       }
     },
     legend: {
-      display: false
+      display: true
     }
   };
   public mainChartColours: Array<any> = [
     { // brandInfo
-      backgroundColor: hexToRgba(getStyle('--info'), 10),
-      borderColor: getStyle('--info'),
+      backgroundColor: 'transparent',
+      borderColor: '#63c2de',
       pointHoverBackgroundColor: '#fff'
     },
     { // brandSuccess
       backgroundColor: 'transparent',
-      borderColor: getStyle('--success'),
+      borderColor: '#6610f2',
+      pointHoverBackgroundColor: '#fff'
+    },
+    { // brandSuccess
+      backgroundColor: 'transparent',
+      borderColor: '#e83e8c', // getStyle('--primary'),
+      pointHoverBackgroundColor: '#fff'
+    },
+    { // brandSuccess
+      backgroundColor: 'transparent',
+      borderColor: '#f86c6b',
+      pointHoverBackgroundColor: '#fff'
+    },
+    { // brandSuccess
+      backgroundColor: 'transparent',
+      borderColor: '#ffc107',
       pointHoverBackgroundColor: '#fff'
     },
     { // brandDanger
       backgroundColor: 'transparent',
-      borderColor: getStyle('--danger'),
+      borderColor: '#17a2b8',
       pointHoverBackgroundColor: '#fff',
       borderWidth: 1,
       borderDash: [8, 5]
     }
   ];
-  public mainChartLegend = false;
+  public mainChartLegend = true;
   public mainChartType = 'line';
 
-  // social box charts
-
-  public brandBoxChartData1: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Facebook'
-    }
-  ];
-  public brandBoxChartData2: Array<any> = [
-    {
-      data: [1, 13, 9, 17, 34, 41, 38],
-      label: 'Twitter'
-    }
-  ];
-  public brandBoxChartData3: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'LinkedIn'
-    }
-  ];
-  public brandBoxChartData4: Array<any> = [
-    {
-      data: [35, 23, 56, 22, 97, 23, 64],
-      label: 'Google+'
-    }
-  ];
-
-  public brandBoxChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public brandBoxChartOptions: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-      }],
-      yAxes: [{
-        display: false,
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-        hoverBorderWidth: 3,
-      }
-    },
-    legend: {
-      display: false
-    }
-  };
-  public brandBoxChartColours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.1)',
-      borderColor: 'rgba(255,255,255,.55)',
-      pointHoverBackgroundColor: '#fff'
-    }
-  ];
-  public brandBoxChartLegend = false;
-  public brandBoxChartType = 'line';
 
   public random(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
   ngOnInit(): void {
+    this.mainChartElements = this.chartData.length;
     // generate random values for mainChart
-    for (let i = 0; i <= this.mainChartElements; i++) {
-      this.mainChartData1.push(this.random(50, 200));
-      this.mainChartData2.push(this.random(80, 100));
-      this.mainChartData3.push(65);
-    }
+    this.chartData.forEach(element => {
+      this.mainChartData1.push(element.t1);
+      this.mainChartData2.push(element.t2);
+      this.mainChartData3.push(element.t3);
+      this.mainChartData4.push(element.t4);
+      this.mainChartData5.push(element.t5);
+      this.mainChartData6.push(element.t6);
+
+      console.log(new Date(element.id));
+      let date = new Date(element.id);
+      alert(element.id)
+      this.mainChartLabels.push(date);
+    });
+
   }
 }
