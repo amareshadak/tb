@@ -1,3 +1,4 @@
+import { DashboardService } from './../../Services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
@@ -9,10 +10,10 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
-  constructor(public datepipe: DatePipe) { }
+  constructor(public datepipe: DatePipe, private dashboardService: DashboardService) { }
 
   // tslint:disable-next-line:max-line-length
-  chartData: Array<any> = [{'id': '1554878886230', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888043666', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888250690', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888369789', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888387324', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888744742', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888807296', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '300', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888863491', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '100', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888921884', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '23'}, {'id': '1554914618467', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554951699518', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554955211318', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554969840225', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554970508651', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999945638', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999947349', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}];
+  chartData: Array<any>; // = [{'id': '1554878886230', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888043666', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888250690', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888369789', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888387324', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888744742', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888807296', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '300', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888863491', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '100', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554888921884', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '23'}, {'id': '1554914618467', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554951699518', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554955211318', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554969840225', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554970508651', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999945638', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}, {'id': '1554999947349', 't1': '366', 't2': '380', 't3': '355', 't4': '367', 't5': '366', 't6': '342', 'reqst_type': '1', 'plantid': '1', 'lineid': '1', 'prodid': '1', 'bk_time': '223'}];
 
   // mainChart
 
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit {
   public mainChartData4: Array<number> = [];
   public mainChartData5: Array<number> = [];
   public mainChartData6: Array<number> = [];
-
+  public mainChartLabels: Array<string> = [];
   public mainChartData: Array<any> = [
     {
       data: this.mainChartData1,
@@ -50,8 +51,6 @@ export class DashboardComponent implements OnInit {
       label: 'T6'
     }
   ];
-  /* tslint:disable:max-line-length */
-  public mainChartLabels: Array<string> = []; // = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   /* tslint:enable:max-line-length */
   public mainChartOptions: any = {
     tooltips: {
@@ -141,27 +140,22 @@ export class DashboardComponent implements OnInit {
   public mainChartLegend = true;
   public mainChartType = 'line';
 
-
-  public random(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
-
   ngOnInit(): void {
-    this.mainChartElements = this.chartData.length;
-    // generate random values for mainChart
-    this.chartData.forEach(element => {
-      this.mainChartData1.push(element.t1);
-      this.mainChartData2.push(element.t2);
-      this.mainChartData3.push(element.t3);
-      this.mainChartData4.push(element.t4);
-      this.mainChartData5.push(element.t5);
-      this.mainChartData6.push(element.t6);
 
-      console.log(new Date(element.id));
-      let date = new Date(element.id);
-      alert(element.id)
-      this.mainChartLabels.push(date);
-    });
 
+      this.dashboardService.getBKData().subscribe((data: any[]) => {
+        this.chartData = data;
+
+        this.mainChartElements = this.chartData.length;
+        this.chartData.forEach(element => {
+          this.mainChartData1.push(element.t1);
+          this.mainChartData2.push(element.t2);
+          this.mainChartData3.push(element.t3);
+          this.mainChartData4.push(element.t4);
+          this.mainChartData5.push(element.t5);
+          this.mainChartData6.push(element.t6);
+          this.mainChartLabels.push(element.id);
+        });
+      });
   }
 }
