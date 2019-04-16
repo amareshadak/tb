@@ -13,8 +13,9 @@ export class LoginComponent {
   ) { }
     invalidLogin: boolean;
     result: boolean;
+
     singIn(credentials) {
-      this.result = this.authService.login(credentials)
+      this.result = this.authService.login(credentials);
      if (this.result) {
      this.router.navigate(['/']);
      } else {

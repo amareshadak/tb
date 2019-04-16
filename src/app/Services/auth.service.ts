@@ -22,6 +22,18 @@ export class AuthService {
     }
 
     isLoggedIn() {
+      if (localStorage.getItem('token') !== '' && localStorage.getItem('token') !== null) {
+        return true;
+      }
       return false;
+    }
+    getCurrentUser() {
+      const token = localStorage.getItem('token');
+      if (!token) { return null; }
+      return {
+        name : 'admin',
+        email : 'admin@gmail.com',
+        role : 'user'
+      };
     }
 }
