@@ -172,7 +172,7 @@ export class BakeChartsComponent implements OnInit {
   getBackingTValue() {
     if (this.radioModel === '5s') {
        this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 100);
+       this.fromDateTime.setMinutes(this.fromDateTime.getMinutes() - 10);
        this.toDateTime = new Date();
     } else if (this.radioModel === '1days') {
       this.fromDateTime = new Date();
@@ -203,7 +203,6 @@ export class BakeChartsComponent implements OnInit {
       }
       data.forEach(element => {
         const date = new Date(element.createAt);
-        // alert(this.chartData[this.mainChartElements - 1].createAt);
         const lastDate = new Date(this.chartData[this.mainChartElements - 1].createAt);
         if ((date > lastDate) || this.count) {
         this.mainChartData1.push(element.t1);

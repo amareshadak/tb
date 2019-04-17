@@ -120,26 +120,26 @@ export class BakeTimeChartsComponent implements OnInit {
 
   getBackingTValue() {
     if (this.radioModel === '5s') {
-       this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 100);
-       this.toDateTime = new Date();
-    } else if (this.radioModel === '1days') {
       this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 1);
-       this.toDateTime = new Date();
-    } else if (this.radioModel === '15days') {
-      this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 15);
-       this.toDateTime = new Date();
-    } else if (this.radioModel === '30days') {
-      this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 30);
-       this.toDateTime = new Date();
-    } else if (this.radioModel === '180days') {
-      this.fromDateTime = new Date();
-       this.fromDateTime.setDate(this.fromDateTime.getDate() - 180);
-       this.toDateTime = new Date();
-    }
+      this.fromDateTime.setMinutes(this.fromDateTime.getMinutes() - 10);
+      this.toDateTime = new Date();
+   } else if (this.radioModel === '1days') {
+     this.fromDateTime = new Date();
+      this.fromDateTime.setDate(this.fromDateTime.getDate() - 1);
+      this.toDateTime = new Date();
+   } else if (this.radioModel === '15days') {
+     this.fromDateTime = new Date();
+      this.fromDateTime.setDate(this.fromDateTime.getDate() - 15);
+      this.toDateTime = new Date();
+   } else if (this.radioModel === '30days') {
+     this.fromDateTime = new Date();
+      this.fromDateTime.setDate(this.fromDateTime.getDate() - 30);
+      this.toDateTime = new Date();
+   } else if (this.radioModel === '180days') {
+     this.fromDateTime = new Date();
+      this.fromDateTime.setDate(this.fromDateTime.getDate() - 180);
+      this.toDateTime = new Date();
+   }
 
 
 
