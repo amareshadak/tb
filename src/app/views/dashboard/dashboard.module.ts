@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 import { BakeChartsComponent } from './bake-charts/bake-charts.component';
+import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { BakeChartsComponent } from './bake-charts/bake-charts.component';
     ButtonsModule.forRoot(),
     CommonModule
   ],
-  declarations: [ DashboardComponent , BakeChartsComponent, BakeTimeChartsComponent ]
+  declarations: [ DashboardComponent , BakeChartsComponent, BakeTimeChartsComponent, DashboardWidgetsComponent ]
 })
 export class DashboardModule { }
