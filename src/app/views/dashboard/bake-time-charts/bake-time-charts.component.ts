@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PDFService } from '../../../Services/PDF.service';
 import { ExcelService } from '../../../Services/Excel.service';
 import { DashboardService } from '../../../Services/dashboard.service';
+import { ChartModel } from '../../../models/chart-model';
 
 @Component({
   selector: 'app-bake-time-charts',
@@ -34,16 +35,15 @@ export class BakeTimeChartsComponent implements OnInit {
   content = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.';
   html = `<span class="btn btn-warning">Never trust not sanitized <code>HTML</code>!!!</span>`;
 
-  // tslint:disable-next-line:max-line-length
-  chartData: Array<any>;
-
-  // mainChart
   public currentDate = new Date();
-  public toDateTime: Date;
-  public fromDateTime: Date;
+  public toDateTime: Date = new Date();
+  public fromDateTime: Date = new Date();
   public mainChartElements: number;
   public mainChartData1: Array<number> = [];
   public mainChartLabels: Array<string> = [];
+  public chartData: Array<ChartModel> = [];
+  public resetChartData: Array<ChartModel> = [];
+
   public mainChartData: Array<any> = [
     {
       data: this.mainChartData1,
@@ -81,8 +81,8 @@ export class BakeTimeChartsComponent implements OnInit {
         ticks: {
           beginAtZero: true,
           maxTicksLimit: 10,
-          stepSize: Math.ceil(500 / 10),
-          max: 500
+          stepSize: Math.ceil(2000 / 10),
+          max: 2000
         }
       }]
     },
@@ -119,51 +119,53 @@ export class BakeTimeChartsComponent implements OnInit {
   }
 
   getBackingTValue() {
+    const date = new Date();
     if (this.radioModel === '5s') {
-      this.fromDateTime = new Date();
-      this.fromDateTime.setMinutes(this.fromDateTime.getMinutes() - 10);
-      this.toDateTime = new Date();
-   } else if (this.radioModel === '1days') {
-     this.fromDateTime = new Date();
-      this.fromDateTime.setDate(this.fromDateTime.getDate() - 1);
-      this.toDateTime = new Date();
-   } else if (this.radioModel === '15days') {
-     this.fromDateTime = new Date();
-      this.fromDateTime.setDate(this.fromDateTime.getDate() - 15);
-      this.toDateTime = new Date();
-   } else if (this.radioModel === '30days') {
-     this.fromDateTime = new Date();
-      this.fromDateTime.setDate(this.fromDateTime.getDate() - 30);
-      this.toDateTime = new Date();
-   } else if (this.radioModel === '180days') {
-     this.fromDateTime = new Date();
-      this.fromDateTime.setDate(this.fromDateTime.getDate() - 180);
-      this.toDateTime = new Date();
-   }
-
-
+       this.fromDateTime = this.addMinutes(date, -60);
+       this.toDateTime = date;
+    } else if (this.radioModel === '1day') {
+       this.fromDateTime.setDate(date.getDate() - 1);
+       this.toDateTime = new Date();
+    } else if (this.radioModel === '15days') {
+       this.fromDateTime.setDate(date.getDate() - 15);
+       this.toDateTime = new Date();
+    } else if (this.radioModel === '30days') {
+       this.fromDateTime.setDate(date.getDate() - 30);
+       this.toDateTime = new Date();
+    } else if (this.radioModel === '180days') {
+       this.fromDateTime.setDate(date.getDate() - 180);
+       this.toDateTime = new Date();
+    }
 
 
     // tslint:disable-next-line:max-line-length
-    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: any[]) => {
-      if (this.count) {
-        this.chartData = data;
-        this.mainChartElements = this.chartData.length;
-      }
-      data.forEach(element => {
-        const date = new Date(element.createAt);
-        // alert(this.chartData[this.mainChartElements - 1].createAt);
-        const lastDate = new Date(this.chartData[this.mainChartElements - 1].createAt);
-        if ((date > lastDate) || this.count) {
-        this.mainChartData1.push(element.bk_time);
-        this.mainChartLabels.push(this.datepipe.transform(date, 'short'));
-        this.chartData.push(element);
+    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: ChartModel[]) => {
+      const ckvalidity = this.chartData === undefined ? 0 : this.chartData.length;
+      if (ckvalidity > 0) {
+        for (let index = 0; index < data.length; index++) {
+          const chartsdate = new Date(data[index].createAt);
+          const lastDate = new Date(this.chartData[this.chartData.length - 1].createAt);
+          if (chartsdate > lastDate) {
+            this.mainChartData1.push(data[index].t1);
+            this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+            this.chartData.push(data[index]);
+            this.mainChartElements = this.chartData.length;
+          }
+        }
+      } else {
+        for (let index = 0; index < data.length; index++) {
+        const chartsdate = new Date(data[index].createAt);
+        this.mainChartData1.push(data[index].t1);
+        this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+        this.chartData.push(data[index]);
         this.mainChartElements = this.chartData.length;
         }
-      });
-      this.count = false;
+      }
       this.chart.chart.update();
     });
+  }
+  addMinutes(date, minutes) {
+    return new Date(date.getTime() + minutes * 60000);
   }
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.chartData, 'sample');
@@ -179,8 +181,11 @@ export class BakeTimeChartsComponent implements OnInit {
 
 
   filterByDays(): void {
-    this.count = true;
-    this.chartData = [];
+    this.chartData.length = 0;
+    this.mainChartData1.length = 0;
+    this.mainChartLabels.length = 0;
+    this.mainChartElements = 0;
+    this.chart.chart.update();
     this.getBackingTValue();
   }
 }

@@ -14,13 +14,12 @@
                           <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)"  (click)="exportAsPDF()">Export PDF</a></li>
                         </ul>
                       </div>
-                  <!-- <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i></button>-->
                   <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="5s" id="option1">5s</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="1day" id="option1">Day</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="15days" id="option1">15 Days</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="30days" id="option2">30 Days</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="180days" id="option3">180 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="5s">5s</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="1day">Day</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="15days">15 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="30days">30 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="180days">180 Days</label>
                   </div> 
                 </div>
             </small>

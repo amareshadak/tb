@@ -16,11 +16,11 @@
                       </div>
                   <!-- <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i></button>-->
                   <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="5s" id="option1">5s</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="1day" id="option1">Day</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="15days" id="option1">15 Days</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="30days" id="option2">30 Days</label>
-                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="180days" id="option3">180 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="5s">5s</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="1day">Day</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="15days">15 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="30days">30 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="180days">180 Days</label>
                   </div> 
                 </div>
             </small>
@@ -30,11 +30,11 @@
     <div class="row">
         <div class="col-sm-12 d-md-none text-center d-sm">
           <div class="btn-group btn-group-sm btn-group-toggle mr-3" data-toggle="buttons">
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="5s" id="option1">5s</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="1day" id="option1">Day</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="15days" id="option1">15 Days</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="30days" id="option2">30 Days</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="180days" id="option3">180 Days</label>
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="5s">5s</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="1day">Day</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="15days">15 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="30days">30 Days</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="180days">180 Days</label>
             <div class="btn-group dropleft btn-group-sm  float-right" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary">
                     <i class="icon-cloud-download"></i>
