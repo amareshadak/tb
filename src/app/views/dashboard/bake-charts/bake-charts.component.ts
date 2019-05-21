@@ -156,7 +156,7 @@ export class BakeChartsComponent implements OnInit {
       }
     },
     legend: {
-      display: false
+      display: true
     }
   };
   public mainChartColours: Array < any > = [{ // brandInfo
