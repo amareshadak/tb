@@ -10,6 +10,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 import { BakeChartsComponent } from './bake-charts/bake-charts.component';
 import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
+import { GaugeChartComponent } from './gauge-chart/gauge-chart.component';
+import { GaugeChartModule } from 'angular-gauge-chart';
 
 @NgModule({
   imports: [
@@ -18,8 +20,15 @@ import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(),
-    CommonModule
+    CommonModule,
+    GaugeChartModule
   ],
-  declarations: [ DashboardComponent , BakeChartsComponent, BakeTimeChartsComponent, DashboardWidgetsComponent ]
+  declarations: [ 
+    DashboardComponent , 
+    BakeChartsComponent, 
+    BakeTimeChartsComponent,
+     DashboardWidgetsComponent, 
+     GaugeChartComponent 
+    ]
 })
 export class DashboardModule { }

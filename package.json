@@ -40,6 +40,7 @@
     "@coreui/coreui": "^2.1.8",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
     "@coreui/icons": "0.3.0",
+    "angular-gauge-chart": "^0.6.0",
     "angular-jwt": "^0.1.11",
     "angular2-jwt": "^0.2.3",
     "bootstrap": "^4.3.1",
