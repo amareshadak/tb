@@ -122,7 +122,7 @@ export class BakeChartsComponent implements OnInit {
         }
       }
     },
-    responsive: false,
+    responsive: true,
     maintainAspectRatio: false,
     scales: {
       xAxes: [{
