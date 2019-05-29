@@ -40,7 +40,7 @@ export const navItems: NavData[] = [
     }
   },
   {
-    name: 'Baking Time Log',
+    name: 'Baking me log',
     url: '/dashboard',
     icon: 'icon-pencil',
     badge: {
@@ -48,24 +48,24 @@ export const navItems: NavData[] = [
       text: ''
     }
   },
-  {
-    name: 'Baking Time Config',
-    url: '/dashboard',
-    icon: 'icon-clock',
-    badge: {
-      variant: 'info',
-      text: ''
-    }
-  },
-  {
-    name: 'Mobile No. Config',
-    url: '/dashboard',
-    icon: 'icon-screen-smartphone',
-    badge: {
-      variant: 'info',
-      text: ''
-    }
-  },
+  // {
+  //   name: 'Baking Time Config',
+  //   url: '/dashboard',
+  //   icon: 'icon-clock',
+  //   badge: {
+  //     variant: 'info',
+  //     text: ''
+  //   }
+  // },
+  // {
+  //   name: 'Mobile No. Config',
+  //   url: '/dashboard',
+  //   icon: 'icon-screen-smartphone',
+  //   badge: {
+  //     variant: 'info',
+  //     text: ''
+  //   }
+  // },
   // {
   //   title: true,
   //   name: 'Theme'
