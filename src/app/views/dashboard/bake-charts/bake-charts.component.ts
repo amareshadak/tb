@@ -137,10 +137,9 @@ export class BakeChartsComponent implements OnInit {
       }],
       yAxes: [{
         ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 20,
-          stepSize: Math.ceil(2000 / 20),
-          max: 2000
+          beginAtZero: false,
+          max: 300,
+          min: 100
         }
       }]
     },
@@ -194,13 +193,13 @@ export class BakeChartsComponent implements OnInit {
   public mainChartType = 'line';
   public count = true;
   ngOnInit() {
-    this.getBackingTValue();
+    this.getBakingTValue();
     setInterval(() => {
-      this.getBackingTValue();
+      this.getBakingTValue();
     }, 10000);
   }
 
-  getBackingTValue() {
+  getBakingTValue() {
     const date = new Date();
     if (this.radioModel === '5s') {
       this.fromDateTime = this.addMinutes(date, -60);
@@ -263,7 +262,7 @@ export class BakeChartsComponent implements OnInit {
   exportAsPDF(): void {
     const doc = new jsPDF();
     doc.autoTable({
-      html: '#divBacking'
+      html: '#divBaking'
     });
     doc.save('pdfname');
   }
@@ -283,6 +282,6 @@ export class BakeChartsComponent implements OnInit {
     this.mainChartLabels.length = 0;
     this.mainChartElements = 0;
     this.chart.chart.update();
-    this.getBackingTValue();
+    this.getBakingTValue();
   }
 }

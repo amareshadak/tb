@@ -1,13 +1,13 @@
-<div class="app-body">
+<div class="app-body" style="background: url('/src/assets/img/homebg2.jpg')">
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
         <div class="col-md-5 mx-auto">
-          <div class="card-group">
-            <div class="card p-4">
-              <div class="card-body">
+          <div class="card-group" >
+            <div class="card p-4"  style="background-color: #052d3c">
+              <div class="card-body"  style="background-color: #052d3c" >
                 <form #f="ngForm" (ngSubmit)="singIn(f.value)">
-                  <h1>Login</h1>
+                  <h1 style="color: white">Please Login</h1>
                   <p class="text-muted">Sign In to your account</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -23,7 +23,7 @@
   
                   </div>
                   <div *ngIf="invalidLogin" class="alert alert-danger">
-                  Username or password invalid.
+                    Username or password invalid.
                   </div>
                   <div class="row">
                     <div class="col-6">
@@ -36,7 +36,6 @@
                 </form>
               </div>
             </div>
-         
           </div>
         </div>
       </div>

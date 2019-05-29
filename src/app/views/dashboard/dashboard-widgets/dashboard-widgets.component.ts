@@ -12,12 +12,12 @@ export class DashboardWidgetsComponent implements OnInit {
   public currentBakingTime = 0 ;
 
   ngOnInit() {
-    this.getBackingTime();
+    this.getBakingTime();
     setInterval(() => {
-      this.getBackingTime();
+      this.getBakingTime();
     }, 10000);
   }
-  getBackingTime() {
+  getBakingTime() {
     this.dashboardService.getBKData().subscribe((data: ChartModel[]) => {
       if (data.length > 0) {
         this.currentBakingTime = data[data.length  - 1].bk_time;

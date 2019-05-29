@@ -47,7 +47,7 @@ export class BakeTimeChartsComponent implements OnInit {
   public mainChartData: Array<any> = [
     {
       data: this.mainChartData1,
-      label: 'Backing Time'
+      label: 'Baking Time'
     }
   ];
   /* tslint:enable:max-line-length */
@@ -79,10 +79,13 @@ export class BakeTimeChartsComponent implements OnInit {
       }],
       yAxes: [{
         ticks: {
-          beginAtZero: true,
-          maxTicksLimit: 10,
-          stepSize: Math.ceil(2000 / 10),
-          max: 2000
+          // beginAtZero: true,
+          // maxTicksLimit: 10,
+          // stepSize: Math.ceil(2000 / 10),
+          // max: 2000
+          beginAtZero: false,
+          max: 300,
+          min: 100
         }
       }]
     },
@@ -112,13 +115,13 @@ export class BakeTimeChartsComponent implements OnInit {
   public mainChartType = 'line';
   public count = true;
   ngOnInit() {
-    this.getBackingTValue();
+    this.getBakingTValue();
     setInterval(() => {
-      this.getBackingTValue();
+      this.getBakingTValue();
     }, 10000);
   }
 
-  getBackingTValue() {
+  getBakingTValue() {
     const date = new Date();
     if (this.radioModel === '5s') {
        this.fromDateTime = this.addMinutes(date, -60);
@@ -174,7 +177,7 @@ export class BakeTimeChartsComponent implements OnInit {
  exportAsPDF(): void {
   const doc = new jsPDF();
   doc.autoTable({
-    html: '#divBackingTime'
+    html: '#divBakingTime'
   });
   doc.save('pdfname');
 }
@@ -186,6 +189,6 @@ export class BakeTimeChartsComponent implements OnInit {
     this.mainChartLabels.length = 0;
     this.mainChartElements = 0;
     this.chart.chart.update();
-    this.getBackingTValue();
+    this.getBakingTValue();
   }
 }
