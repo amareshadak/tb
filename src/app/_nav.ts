@@ -41,7 +41,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Baking Time Log',
-    url: '/dashboard',
+    url: '/timelog',
     icon: 'icon-pencil',
     badge: {
       variant: 'info',
@@ -50,7 +50,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Baking Time Config',
-    url: '/dashboard',
+    url: '/404',
     icon: 'icon-clock',
     badge: {
       variant: 'info',
@@ -59,7 +59,7 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Mobile No. Config',
-    url: '/dashboard',
+    url: '/404',
     icon: 'icon-screen-smartphone',
     badge: {
       variant: 'info',

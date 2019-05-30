@@ -63,6 +63,10 @@ export const routes: Routes = [
         loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
       },
       {
+        path: 'timelog',
+        loadChildren: './views/timelog/timelog.module#TimeLogModule'
+      },
+      {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },
