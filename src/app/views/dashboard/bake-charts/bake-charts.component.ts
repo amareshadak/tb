@@ -139,7 +139,8 @@ export class BakeChartsComponent implements OnInit {
         ticks: {
           beginAtZero: false,
           max: 300,
-          min: 100
+          min: 200,
+          stepSize: 5
         }
       }]
     },
@@ -196,7 +197,7 @@ export class BakeChartsComponent implements OnInit {
     this.getBakingTValue();
     setInterval(() => {
       this.getBakingTValue();
-    }, 10000);
+    }, 10000000);
   }
 
   getBakingTValue() {

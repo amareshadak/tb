@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-5 mx-auto">
           <div class="card-group" >
-            <div class="card p-4"  style="background-color: #052d3c">
+            <div class="card p-4"  style="background-color: #052d3c; border: 1px solid #052d3c;">
               <div class="card-body"  style="background-color: #052d3c" >
                 <form #f="ngForm" (ngSubmit)="singIn(f.value)">
                   <h1 style="color: white">Please Login</h1>
@@ -42,3 +42,7 @@
     </div>
   </main>
 </div>
+<style>
+.app-body {
+    margin-top: 0px;
+}</style>

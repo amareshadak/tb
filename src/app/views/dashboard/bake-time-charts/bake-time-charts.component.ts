@@ -85,7 +85,8 @@ export class BakeTimeChartsComponent implements OnInit {
           // max: 2000
           beginAtZero: false,
           max: 300,
-          min: 100
+          min: 200,
+          stepSize: 5
         }
       }]
     },
@@ -118,7 +119,7 @@ export class BakeTimeChartsComponent implements OnInit {
     this.getBakingTValue();
     setInterval(() => {
       this.getBakingTValue();
-    }, 10000);
+    }, 10000000);
   }
 
   getBakingTValue() {
