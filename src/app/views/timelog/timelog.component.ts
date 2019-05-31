@@ -45,4 +45,7 @@ export class TimeLogComponent implements OnInit {
     let date = new Date(params.value)
     return date.toLocaleString();
   }
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
+  }
 }
