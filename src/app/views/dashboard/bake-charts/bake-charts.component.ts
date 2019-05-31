@@ -161,7 +161,7 @@ export class BakeChartsComponent implements OnInit {
   };
   public mainChartColours: Array < any > = [{ // brandInfo
       backgroundColor: 'transparent',
-      borderColor: '#63c2de',
+      borderColor: '#0000FF',
       pointHoverBackgroundColor: '#fff'
     },
     { // brandSuccess

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../Services/dashboard.service';
 import { ChartModel } from '../../models/chart-model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   templateUrl: 'timelog.component.html',
@@ -20,10 +21,13 @@ export class TimeLogComponent implements OnInit {
       {headerName: 'T6', field: 't6'}
   ];
   rowData:any = [];
-private defaultColDef;
-  constructor(private dashboardService: DashboardService,) {
-
-  }
+  public defaultColDef;
+  constructor(
+    private dashboardService: DashboardService,
+    public datepipe: DatePipe
+    ) {
+      
+     }
 
   ngOnInit() {
       this.dashboardService.getBKData().subscribe((result: ChartModel[]) => {
@@ -38,6 +42,7 @@ private defaultColDef;
   
   }
   numberFormatter(params) {
-    return params.values;
+    let date = new Date(params.value)
+    return date.toLocaleString();
   }
 }
