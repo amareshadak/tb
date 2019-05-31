@@ -24,10 +24,8 @@
               "node_modules/flag-icon-css/css/flag-icon.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/simple-line-icons/css/simple-line-icons.css",
-              "src/scss/style.scss",
-              "node_modules/@swimlane/ngx-datatable/release/assets/app.css",
-              "node_modules/@swimlane/ngx-datatable/release/themes/material.css",
-              "node_modules/@swimlane/ngx-datatable/release/assets/icons.css"
+              "src/scss/style.scss"
+              
             ],
             "stylePreprocessorOptions": {
               "includePaths": ["./node_modules"]
@@ -36,6 +34,7 @@
               "node_modules/chart.js/dist/Chart.min.js"
             ]
           },
+          
           "configurations": {
             "production": {
               "optimization": true,
@@ -149,3 +148,4 @@
     }
   }
 }
+

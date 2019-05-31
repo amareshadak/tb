@@ -127,7 +127,7 @@ export class BakeChartsComponent implements OnInit {
     scales: {
       xAxes: [{
         gridLines: {
-          drawOnChartArea: false,
+          drawOnChartArea: true,
         },
         ticks: {
           callback: function (value: any) {
@@ -195,13 +195,14 @@ export class BakeChartsComponent implements OnInit {
   public count = true;
   ngOnInit() {
     this.getBakingTValue();
-    setInterval(() => {
-      this.getBakingTValue();
-    }, 10000000);
+    // setInterval(() => {
+    //   this.getBakingTValue();
+    // }, 10000000);
   }
 
   getBakingTValue() {
     const date = new Date();
+    this.fromDateTime = new Date();
     if (this.radioModel === '5s') {
       this.fromDateTime = this.addMinutes(date, -60);
       this.toDateTime = date;
@@ -254,6 +255,7 @@ export class BakeChartsComponent implements OnInit {
         }
       }
       this.chart.chart.update();
+      this.chart.chart.resize();
     });
   }
   exportAsXLSX(): void {

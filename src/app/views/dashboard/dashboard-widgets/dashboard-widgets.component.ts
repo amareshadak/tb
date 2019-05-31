@@ -13,9 +13,9 @@ export class DashboardWidgetsComponent implements OnInit {
 
   ngOnInit() {
     this.getBakingTime();
-    setInterval(() => {
-      this.getBakingTime();
-    }, 10000);
+    // setInterval(() => {
+    //   this.getBakingTime();
+    // }, 10000);
   }
   getBakingTime() {
     this.dashboardService.getBKData().subscribe((data: ChartModel[]) => {

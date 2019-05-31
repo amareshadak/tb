@@ -117,13 +117,14 @@ export class BakeTimeChartsComponent implements OnInit {
   public count = true;
   ngOnInit() {
     this.getBakingTValue();
-    setInterval(() => {
-      this.getBakingTValue();
-    }, 10000000);
+    // setInterval(() => {
+    //   this.getBakingTValue();
+    // }, 10000000);
   }
 
   getBakingTValue() {
     const date = new Date();
+    this.fromDateTime = new Date();
     if (this.radioModel === '5s') {
        this.fromDateTime = this.addMinutes(date, -60);
        this.toDateTime = date;
