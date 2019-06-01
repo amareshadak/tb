@@ -1,30 +1,59 @@
 <div class="card">
-  <div class="card-header" style="background-color: #20a8d8">
+  <div class="card-header">
     Baking Time Log
-
     <div class="card-header-actions">
-      <small class="text-muted">
-        <div class="col-sm-12 d-none d-md-block">
-          <div class="btn-group  float-right" dropdown>
-            <button dropdownToggle type="button" class="btn btn-primary">
-              <i class="icon-cloud-download"></i>
-            </button>
-            <ul *dropdownMenu class="dropdown-menu" role="menu">
-              <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="exportAsXLSX()">Export
-                  Excel</a></li>
-              <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="exportAsPDF()">Export
-                  PDF</a></li>
-            </ul>
-          </div>
-        </div>
-      </small>
+     <span>Export &nbsp;&nbsp;&nbsp;</span> 
+      <div class="btn-group">
+        <button type="button" (click)="exportJsonToPdf()" class="btn btn-primary">PDF</button>
+        <button type="button" (click)="exportAsXLSX();" class="btn btn-primary">Excel</button>
+        <button type="button" (click)="exportAsCSV();" class="btn btn-primary">CSV</button>
+        <button type="button" (click)="copyto();" class="btn btn-primary">Copy</button>
+      </div>
     </div>
   </div>
   <div class="card-body">
     <div class="row">
+
       <ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-material" [rowData]="rowData"
-        [columnDefs]="columnDefs" [pagination]="true" [paginationAutoPageSize]="true"  (firstDataRendered)="onFirstDataRendered($event)" [defaultColDef]="defaultColDef">
+        [columnDefs]="columnDefs" [pagination]="true" [paginationAutoPageSize]="true"
+        [defaultColDef]="defaultColDef">
       </ag-grid-angular>
+
+      <!-- (firstDataRendered)="onFirstDataRendered($event)"  -->
     </div>
   </div>
+</div>
+<div style="display: none">
+  <table class="table table-bordered" id="divBaking">
+    <thead>
+      <td>id</td>
+      <td>t1</td>
+      <td>t2</td>
+      <td>t3</td>
+      <td>t4</td>
+      <td>t5</td>
+      <td>t6</td>
+      <td>product_name</td>
+      <td>plantid</td>
+      <td>lineid</td>
+      <td>bk_time</td>
+      <td>createAt</td>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of rowData">
+        <td>{{item.id}}</td>
+        <td>{{item.t1}}</td>
+        <td>{{item.t2}}</td>
+        <td>{{item.t3}}</td>
+        <td>{{item.t4}}</td>
+        <td>{{item.t5}}</td>
+        <td>{{item.t6}}</td>
+        <td>Meri Gold</td>
+        <td>{{item.plantid}}</td>
+        <td>{{item.lineid}}</td>
+        <td>{{item.bk_time}}</td>
+        <td>{{item.createAt}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>

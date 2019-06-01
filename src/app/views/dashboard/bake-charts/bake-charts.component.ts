@@ -109,7 +109,7 @@ export class BakeChartsComponent implements OnInit {
   /* tslint:enable:max-line-length */
   public mainChartOptions: any = {
     tooltips: {
-      enabled: false,
+      enabled: true,
       custom: CustomTooltips,
       intersect: true,
       mode: 'index',
