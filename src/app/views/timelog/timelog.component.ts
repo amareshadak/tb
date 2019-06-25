@@ -12,17 +12,20 @@ import 'jspdf-autotable';
   styleUrls: ['./timelog.component.scss']
 })
 export class TimeLogComponent implements OnInit {
+
+  private rowClassRules;
+
  
   columnDefs = [
-      {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter},
-      {headerName: 'Baking Time (Sec)', field: 'bk_time' },
-      {headerName: 'Product Name', field: 'reqst_type',valueFormatter: this.ProductFormatter},
-      {headerName: 'T1', field: 't1'},
-      {headerName: 'T2', field: 't2'},
-      {headerName: 'T3', field: 't3'},
-      {headerName: 'T4', field: 't4'},
-      {headerName: 'T5', field: 't5'},
-      {headerName: 'T6', field: 't6'}
+      {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter,suppressSizeToFit: true,width: 200},
+      {headerName: 'Baking Time', field: 'bk_time' ,width: 100},
+      {headerName: 'Product Name', field: 'reqst_type',valueFormatter: this.ProductFormatter,suppressSizeToFit: true,width: 150},
+      {headerName: 'T1', field: 't1',width: 100},
+      {headerName: 'T2', field: 't2',width: 100},
+      {headerName: 'T3', field: 't3',width: 100},
+      {headerName: 'T4', field: 't4',width: 100},
+      {headerName: 'T5', field: 't5',width: 100},
+      {headerName: 'T6', field: 't6',width: 100}
   ];
   rowData:any = [];
   public defaultColDef;
@@ -38,8 +41,17 @@ export class TimeLogComponent implements OnInit {
         resizable: true,
         filter: true
       };
+
+      
   
   }
+
+ getRowClass = function(params) {
+    if (params.node.rowIndex % 2 === 0) {
+        return 'red';
+    }
+}
+
   numberFormatter(params) {
     let date = new Date(params.value)
     return date.toLocaleString();
