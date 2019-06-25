@@ -42,8 +42,6 @@ export class TimeLogComponent implements OnInit {
         filter: true
       };
 
-      
-  
   }
 
  getRowClass = function(params) {
