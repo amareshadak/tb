@@ -85,8 +85,8 @@ export class BakeTimeChartsComponent implements OnInit {
           // max: 2000
           beginAtZero: false,
           max: 300,
-          min: 200,
-          stepSize: 5
+          min: 100,
+          stepSize: 20
         }
       }]
     },

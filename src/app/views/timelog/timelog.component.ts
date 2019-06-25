@@ -17,11 +17,11 @@ export class TimeLogComponent implements OnInit {
 
  
   columnDefs = [
-      {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter,suppressSizeToFit: true,width: 200},
-      {headerName: 'Baking Time', field: 'bk_time' ,width: 100},
+      {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter,suppressSizeToFit: true,width: 190},
+      {headerName: 'Baking Time', field: 'bk_time' ,valueFormatter: this.bakingTimeFormatter, width: 140},
       {headerName: 'Product Name', field: 'reqst_type',valueFormatter: this.ProductFormatter,suppressSizeToFit: true,width: 150},
-      {headerName: 'T1', field: 't1',width: 100},
-      {headerName: 'T2', field: 't2',width: 100},
+      {headerName: 'T1', field: 't1',width: 90},
+      {headerName: 'T2', field: 't2',width: 90},
       {headerName: 'T3', field: 't3',width: 100},
       {headerName: 'T4', field: 't4',width: 100},
       {headerName: 'T5', field: 't5',width: 100},
@@ -39,7 +39,10 @@ export class TimeLogComponent implements OnInit {
       this.defaultColDef = {
         sortable: true,
         resizable: true,
-        filter: true
+        filter: true,
+        headerComponentParams : {
+          menuIcon: 'fa-bars'
+        }
       };
 
   }
@@ -55,13 +58,32 @@ export class TimeLogComponent implements OnInit {
     return date.toLocaleString();
   }
 
+  bakingTimeFormatter(params) {
+    if(params.value==999){
+      return 'STOP';
+    }
+    else{
+      return params.value;
+    }
+    
+  }
+
   ProductFormatter(params) {
     return 'Marie Gold';
   }
 
-  // onFirstDataRendered(params) {
-  //   params.api.sizeColumnsToFit();
-  // }
+  public gridStyle: any = {
+    general: {
+        normal: 'grid-eor-normal'
+    },
+    row: {
+        general: {
+            normal: 'grid-eor-row-normal',
+            hovered: 'grid-eor-row-hovered',
+            selected: 'grid-eor-row-selected'
+        }
+    }
+}
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.rowData, 'sample');

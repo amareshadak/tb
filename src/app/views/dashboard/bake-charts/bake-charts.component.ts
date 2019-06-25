@@ -109,7 +109,7 @@ export class BakeChartsComponent implements OnInit {
   /* tslint:enable:max-line-length */
   public mainChartOptions: any = {
     tooltips: {
-      enabled: true,
+      enabled: false,
       custom: CustomTooltips,
       intersect: true,
       mode: 'index',
@@ -138,9 +138,9 @@ export class BakeChartsComponent implements OnInit {
       yAxes: [{
         ticks: {
           beginAtZero: false,
-          max: 300,
-          min: 200,
-          stepSize: 5
+          max: 350,
+          min: 100,
+          stepSize: 25
         }
       }]
     },
