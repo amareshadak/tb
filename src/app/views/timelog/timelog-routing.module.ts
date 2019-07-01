@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: TimeLogComponent,
     data: {
-      title: 'Bakeing Time Log'
+      title: 'Baking Time Log'
     }
   }
 ];
