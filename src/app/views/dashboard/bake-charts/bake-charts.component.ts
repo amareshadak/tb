@@ -235,7 +235,7 @@ export class BakeChartsComponent implements OnInit {
             this.mainChartData4.push(data[index].t4);
             this.mainChartData5.push(data[index].t5);
             this.mainChartData6.push(data[index].t6);
-            this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+            this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
             this.chartData.push(data[index]);
             this.mainChartElements = this.chartData.length;
           }
@@ -249,7 +249,7 @@ export class BakeChartsComponent implements OnInit {
           this.mainChartData4.push(data[index].t4);
           this.mainChartData5.push(data[index].t5);
           this.mainChartData6.push(data[index].t6);
-          this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+          this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
           this.chartData.push(data[index]);
           this.mainChartElements = this.chartData.length;
         }

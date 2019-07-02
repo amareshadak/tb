@@ -152,7 +152,7 @@ export class BakeTimeChartsComponent implements OnInit {
           const lastDate = new Date(this.chartData[this.chartData.length - 1].createAt);
           if (chartsdate > lastDate) {
             this.mainChartData1.push(data[index].bk_time);
-            this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+            this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
             this.chartData.push(data[index]);
             this.mainChartElements = this.chartData.length;
           }
@@ -161,7 +161,7 @@ export class BakeTimeChartsComponent implements OnInit {
         for (let index = 0; index < data.length; index++) {
         const chartsdate = new Date(data[index].createAt);
         this.mainChartData1.push(data[index].bk_time);
-        this.mainChartLabels.push(this.datepipe.transform(chartsdate, 'short'));
+        this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
         this.chartData.push(data[index]);
         this.mainChartElements = this.chartData.length;
         }
