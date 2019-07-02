@@ -11,47 +11,91 @@ import 'jspdf-autotable';
   templateUrl: 'timelog.component.html',
   styleUrls: ['./timelog.component.scss']
 })
-export class TimeLogComponent implements OnInit {
+export class TimeLogComponent {
+  public gridApi;
+  public gridColumnApi;
 
-  private rowClassRules;
-
- 
-  columnDefs = [
-      {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter,suppressSizeToFit: true,width: 190},
-      {headerName: 'Baking Time', field: 'bk_time' ,valueFormatter: this.bakingTimeFormatter, width: 140},
-      {headerName: 'Product Name', field: 'reqst_type',valueFormatter: this.ProductFormatter,suppressSizeToFit: true,width: 150},
-      {headerName: 'T1', field: 't1',width: 90},
-      {headerName: 'T2', field: 't2',width: 90},
-      {headerName: 'T3', field: 't3',width: 100},
-      {headerName: 'T4', field: 't4',width: 100},
-      {headerName: 'T5', field: 't5',width: 100},
-      {headerName: 'T6', field: 't6',width: 100}
-  ];
-  rowData:any = [];
+  public columnDefs;
   public defaultColDef;
-  constructor(private dashboardService: DashboardService, private excelService: ExcelService,private pdfService: PDFService) { }
+  public overlayLoadingTemplate;
+  public overlayNoRowsTemplate;
+  public rowData: any = [];
 
-  ngOnInit() {
-      this.dashboardService.getBKData().subscribe((result: ChartModel[]) => {
-        this.rowData = result;
-      });
-
-      this.defaultColDef = {
+  constructor(private dashboardService: DashboardService, private excelService: ExcelService, private pdfService: PDFService) {
+    this.columnDefs = [
+      {
+        headerName: 'Log Time',
+        field: 'createAt',
         sortable: true,
-        resizable: true,
-        filter: true,
-        headerComponentParams : {
-          menuIcon: 'fa-bars'
-        }
-      };
-
+        valueFormatter: this.numberFormatter,
+        suppressSizeToFit: true,
+        width: 190
+      },
+      {
+        headerName: 'Baking Time',
+        field: 'bk_time',
+        valueFormatter: this.bakingTimeFormatter,
+        width: 140
+      },
+      {
+        headerName: 'Product Name',
+        field: 'reqst_type',
+        valueFormatter: this.ProductFormatter,
+        suppressSizeToFit: true,
+        width: 150
+      },
+      {
+        headerName: 'T1',
+        field: 't1',
+        width: 90
+      },
+      {
+        headerName: 'T2',
+        field: 't2',
+        width: 90
+      },
+      {
+        headerName: 'T3',
+        field: 't3',
+        width: 100
+      },
+      {
+        headerName: 'T4',
+        field: 't4',
+        width: 100
+      },
+      {
+        headerName: 'T5',
+        field: 't5',
+        width: 100
+      },
+      {
+        headerName: 'T6',
+        field: 't6',
+        width: 100
+      }
+    ];
+    this.defaultColDef = {
+      sortable: true,
+      resizable: true,
+      filter: true
+    };
+    this.overlayLoadingTemplate =
+      '<span class="ag-overlay-loading-center">Please wait while your rows are loading</span>';
+    this.overlayNoRowsTemplate =
+    '<span class="ag-overlay-loading-center">Please wait while your rows are loading</span>';
+      //"<span style=\"padding: 10px; border: 2px solid #444; background: lightgoldenrodyellow;\">This is a custom 'no rows' overlay</span>";
   }
 
- getRowClass = function(params) {
-    if (params.node.rowIndex % 2 === 0) {
-        return 'red';
-    }
-}
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.gridApi.showLoadingOverlay();
+    this.dashboardService.getBKData().subscribe((result: ChartModel[]) => {
+      this.rowData = result;
+      this.gridApi.hideOverlay();
+    });
+  }
 
   numberFormatter(params) {
     let date = new Date(params.value)
@@ -59,13 +103,13 @@ export class TimeLogComponent implements OnInit {
   }
 
   bakingTimeFormatter(params) {
-    if(params.value==999){
+    if (params.value == 999) {
       return 'STOP';
     }
-    else{
+    else {
       return params.value;
     }
-    
+
   }
 
   ProductFormatter(params) {
@@ -74,16 +118,16 @@ export class TimeLogComponent implements OnInit {
 
   public gridStyle: any = {
     general: {
-        normal: 'grid-eor-normal'
+      normal: 'grid-eor-normal'
     },
     row: {
-        general: {
-            normal: 'grid-eor-row-normal',
-            hovered: 'grid-eor-row-hovered',
-            selected: 'grid-eor-row-selected'
-        }
+      general: {
+        normal: 'grid-eor-row-normal',
+        hovered: 'grid-eor-row-hovered',
+        selected: 'grid-eor-row-selected'
+      }
     }
-}
+  }
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.rowData, 'sample');
@@ -97,11 +141,11 @@ export class TimeLogComponent implements OnInit {
     doc.save(new Date() + 'BakeTimeLog');
   }
 
-  exportAsCSV():void {
+  exportAsCSV(): void {
     this.excelService.exportJsonToCsv(this.rowData);
   }
 
-  copyto(){
+  copyto() {
     var val = JSON.stringify(this.rowData);
     let selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
@@ -116,4 +160,122 @@ export class TimeLogComponent implements OnInit {
     document.body.removeChild(selBox);
     alert('Copied !')
   }
+
+  onBtShowLoading() {
+    this.gridApi.showLoadingOverlay();
+  }
+
+  onBtShowNoRows() {
+    this.gridApi.showNoRowsOverlay();
+  }
+
+  onBtHide() {
+    this.gridApi.hideOverlay();
+  }
 }
+// export class TimeLogComponent implements OnInit {
+
+//   private rowClassRules;
+
+
+//   columnDefs = [
+//       {headerName: 'Log Time', field: 'createAt', sortable: true ,valueFormatter: this.numberFormatter,suppressSizeToFit: true,width: 190},
+//       {headerName: 'Baking Time', field: 'bk_time' ,valueFormatter: this.bakingTimeFormatter, width: 140},
+//       {headerName: 'Product Name', field: 'reqst_type',valueFormatter: this.ProductFormatter,suppressSizeToFit: true,width: 150},
+//       {headerName: 'T1', field: 't1',width: 90},
+//       {headerName: 'T2', field: 't2',width: 90},
+//       {headerName: 'T3', field: 't3',width: 100},
+//       {headerName: 'T4', field: 't4',width: 100},
+//       {headerName: 'T5', field: 't5',width: 100},
+//       {headerName: 'T6', field: 't6',width: 100}
+//   ];
+//   rowData:any = [];
+//   public defaultColDef;
+//   constructor(private dashboardService: DashboardService, private excelService: ExcelService,private pdfService: PDFService) { }
+
+//   ngOnInit() {
+//       this.dashboardService.getBKData().subscribe((result: ChartModel[]) => {
+//         this.rowData = result;
+//       });
+
+//       this.defaultColDef = {
+//         sortable: true,
+//         resizable: true,
+//         filter: true,
+//         headerComponentParams : {
+//           menuIcon: 'fa-bars'
+//         }
+//       };
+
+//   }
+
+//  getRowClass = function(params) {
+//     if (params.node.rowIndex % 2 === 0) {
+//         return 'red';
+//     }
+// }
+
+//   numberFormatter(params) {
+//     let date = new Date(params.value)
+//     return date.toLocaleString();
+//   }
+
+//   bakingTimeFormatter(params) {
+//     if(params.value==999){
+//       return 'STOP';
+//     }
+//     else{
+//       return params.value;
+//     }
+
+//   }
+
+//   ProductFormatter(params) {
+//     return 'Marie Gold';
+//   }
+
+//   public gridStyle: any = {
+//     general: {
+//         normal: 'grid-eor-normal'
+//     },
+//     row: {
+//         general: {
+//             normal: 'grid-eor-row-normal',
+//             hovered: 'grid-eor-row-hovered',
+//             selected: 'grid-eor-row-selected'
+//         }
+//     }
+// }
+
+//   exportAsXLSX(): void {
+//     this.excelService.exportAsExcelFile(this.rowData, 'sample');
+//   }
+
+//   exportJsonToPdf(): void {
+//     const doc = new jsPDF();
+//     doc.autoTable({
+//       html: '#divBaking'
+//     });
+//     doc.save(new Date() + 'BakeTimeLog');
+//   }
+
+//   exportAsCSV():void {
+//     this.excelService.exportJsonToCsv(this.rowData);
+//   }
+
+//   copyto(){
+//     var val = JSON.stringify(this.rowData);
+//     let selBox = document.createElement('textarea');
+//     selBox.style.position = 'fixed';
+//     selBox.style.left = '0';
+//     selBox.style.top = '0';
+//     selBox.style.opacity = '0';
+//     selBox.value = val;
+//     document.body.appendChild(selBox);
+//     selBox.focus();
+//     selBox.select();
+//     document.execCommand('copy');
+//     document.body.removeChild(selBox);
+//     alert('Copied !')
+//   }
+// }

@@ -14,13 +14,36 @@
   <div class="card-body">
     <div class="row">
 
-      <ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-material" [rowData]="rowData"
+      <!-- <ag-grid-angular style="width: 100%; height: 500px;" class="ag-theme-material" [rowData]="rowData"
         [columnDefs]="columnDefs" [pagination]="true" [paginationAutoPageSize]="true"
         [getRowClass]="getRowClass"
         [defaultColDef]="defaultColDef">
-      </ag-grid-angular>
+      </ag-grid-angular> -->
+
+      <ag-grid-angular
+        #agGrid
+        style="width: 100%; height: 500px;"
+        id="myGrid"
+        class="ag-theme-material"
+        [columnDefs]="columnDefs"
+        [defaultColDef]="defaultColDef"
+        [rowData]="rowData"
+        [overlayLoadingTemplate]="overlayLoadingTemplate"
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+        (gridReady)="onGridReady($event)"
+        [pagination]="true" 
+        [paginationAutoPageSize]="true"
+      ></ag-grid-angular>
       <!-- (firstDataRendered)="onFirstDataRendered($event)"  -->
     </div>
+
+    <!-- <div class="hidden" style="position: absolute; top: 0px; left: 0px;">
+      <button (click)="onBtShowLoading()">Show Loading Overlay</button>
+      <button (click)="onBtShowNoRows()">Show No Rows Overlay</button>
+      <button (click)="onBtHide()">Hide Overlay</button>
+    </div> -->
+
+
   </div>
 </div>
 <div style="display: none">
