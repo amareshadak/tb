@@ -166,12 +166,12 @@ export class BakeChartsComponent implements OnInit {
     },
     { // brandSuccess
       backgroundColor: 'transparent',
-      borderColor: '#6610f2',
+      borderColor: '#1BE262',
       pointHoverBackgroundColor: '#fff'
     },
     { // brandSuccess
       backgroundColor: 'transparent',
-      borderColor: '#e83e8c', // getStyle('--primary'),
+      borderColor: '#DC3545', // getStyle('--primary'),
       pointHoverBackgroundColor: '#fff'
     },
     { // brandSuccess
