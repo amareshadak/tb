@@ -67,6 +67,14 @@ export const routes: Routes = [
         loadChildren: './views/timelog/timelog.module#TimeLogModule'
       },
       {
+        path: 'baking-time-config',
+        loadChildren: './views/bakeing-time-config/bakeing-time-config.module#BakeingTimeConfigModule'
+      },
+      {
+        path: 'mobile-number-config',
+        loadChildren: './views/mobile-number-config/mobile-number-config.module#MobileNumberConfigModule'
+      },
+      {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule'
       },

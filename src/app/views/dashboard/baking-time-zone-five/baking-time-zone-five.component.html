@@ -1,0 +1,86 @@
+<div class="card">
+  
+    <div class="card-body">
+      <div class="row">
+        <!-- <div class="col-sm-12 d-md-none text-center d-sm"> -->
+        <div class="col-sm-12 text-center d-sm">
+          <div class="btn-group btn-group-sm btn-group-toggle mr-3" data-toggle="buttons">
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="5s"
+              id="option1">Hour</label>
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="1day"
+              id="option1">Day</label>
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="15days"
+              id="option1">15 Days</label>
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="30days"
+              id="option2">30 Days</label>
+            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" (click)="filterByDays()" btnRadio="180days"
+              id="option3">180 Days</label>
+            <div class="btn-group dropleft btn-group-sm  float-right" dropdown>
+              <button dropdownToggle type="button" class="btn btn-primary">
+                <i class="icon-cloud-download"></i>
+              </button>
+              <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
+                <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="exportAsXLSX()">Export
+                    Excel</a></li>
+                <li role="menuitem"><a class="dropdown-item" href="javascript:void(0)" (click)="exportAsPDF()">Export
+                    PDF</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="chart-wrapper" style="height:500px;margin-top:40px;">
+            <canvas baseChart class="chart" style="width: 10000px" [datasets]="mainChartData" [labels]="mainChartLabels"
+              [options]="mainChartOptions" [colors]="mainChartColours" [legend]="mainChartLegend"
+              [chartType]="mainChartType"></canvas>
+          </div>
+        </div>
+        <!--/.col-->
+      </div>
+      <!--/.row-->
+    </div>
+  </div>
+  
+  <div style="display: none">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Baking Time
+      </div>
+      <div class="card-body">
+        <table style="border: 1px solid black;" id="divBaking">
+          <thead>
+            <td>id</td>
+            <td>t1</td>
+            <td>t2</td>
+            <td>t3</td>
+            <td>t4</td>
+            <td>t5</td>
+            <td>t6</td>
+            <td>reqst_type</td>
+            <td>plantid</td>
+            <td>lineid</td>
+            <td>bk_time</td>
+            <td>createAt</td>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of chartData">
+              <td>{{item.id}}</td>
+              <td>{{item.t1}}</td>
+              <td>{{item.t2}}</td>
+              <td>{{item.t3}}</td>
+              <td>{{item.t4}}</td>
+              <td>{{item.t5}}</td>
+              <td>{{item.t6}}</td>
+              <td>{{item.reqst_type}}</td>
+              <td>{{item.plantid}}</td>
+              <td>{{item.lineid}}</td>
+              <td>{{item.bk_time}}</td>
+              <td>{{item.createAt}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

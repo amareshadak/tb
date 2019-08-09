@@ -1,6 +1,60 @@
 <div class="animated fadeIn">
-    <app-dashboard-widgets></app-dashboard-widgets>
-    <app-bake-charts></app-bake-charts>
-    <app-bake-time-charts></app-bake-time-charts>
+    <div class="row">
+        <div class="col-md-12">
+            <app-dashboard-widgets></app-dashboard-widgets>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Nav tabs -->
+            <tabset [justified]="true">
+                <tab>
+                    <ng-template tabHeading> &nbsp;<span class="badge badge-dar">All Zones</span></ng-template>
+                    <app-bake-charts></app-bake-charts>
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            1</span></ng-template>
+                    <app-baking-time-zone-one></app-baking-time-zone-one>
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            2</span></ng-template>
+                    <app-baking-time-zone-two></app-baking-time-zone-two>
+
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            3</span></ng-template>
+                    <app-baking-time-zone-three></app-baking-time-zone-three>
+
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            4</span></ng-template>
+                    <app-baking-time-zone-four></app-baking-time-zone-four>
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            5</span></ng-template>
+                    <app-baking-time-zone-five></app-baking-time-zone-five>
+                </tab>
+                <tab>
+                    <ng-template tabHeading><i class="fa fa-line-chart"></i> &nbsp;<span class="badge badge-dar">Zone
+                            6</span></ng-template>
+                    <app-baking-time-zone-six></app-baking-time-zone-six>
+                </tab>
+            </tabset>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+    <div calss=clearfix></div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <app-bake-time-charts></app-bake-time-charts>
+        </div>
+    </div>
     <!-- <app-gauge-chart></app-gauge-chart> -->
 </div>

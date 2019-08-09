@@ -2,24 +2,26 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { PDFService } from '../../../Services/PDF.service';
 import { DashboardService } from '../../../Services/dashboard.service';
-import { Component,OnInit,ViewChild,SecurityContext, Input } from '@angular/core';
+import { Component,OnInit,ViewChild,SecurityContext } from '@angular/core';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { DatePipe } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ExcelService } from '../../../Services/Excel.service';
 import { ChartModel } from '../../../models/chart-model';
-
+import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
+import { BakingTimeConfig } from '../../../models/baking-time-config';
 
 @Component({
-  selector: 'app-bake-charts',
-  templateUrl: './bake-charts.component.html',
-  styleUrls: ['./bake-charts.component.scss']
+  selector: 'app-baking-time-zone-three',
+  templateUrl: './baking-time-zone-three.component.html',
+  styleUrls: ['./baking-time-zone-three.component.scss']
 })
-export class BakeChartsComponent implements OnInit {
+export class BakingTimeZoneThreeComponent implements OnInit {
   radioModel = '5s';
-  @Input() bakeTime: any;
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  lowerLimit: any;
+  upperLimit: any;
   constructor(
     public datepipe: DatePipe,
     private dashboardService: DashboardService,
@@ -27,11 +29,11 @@ export class BakeChartsComponent implements OnInit {
     private excelService: ExcelService,
     private pdfService: PDFService
   ) {
-    this.html = sanitizer.sanitize(SecurityContext.HTML, this.html);
+    // this.html = sanitizer.sanitize(SecurityContext.HTML, this.html);
   }
-  title = 'Welcome word';
-  content = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.';
-  html = `<span class="btn btn-warning">Never trust not sanitized <code>HTML</code>!!!</span>`;
+  // title = 'Welcome word';
+  // content = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.';
+  // html = `<span class="btn btn-warning">Never trust not sanitized <code>HTML</code>!!!</span>`;
 
   // tslint:disable-next-line:max-line-length
 
@@ -41,12 +43,9 @@ export class BakeChartsComponent implements OnInit {
   public toDateTime: Date = new Date();
   public fromDateTime: Date = new Date();
   public mainChartElements: number;
-  public mainChartData1: Array < number > = [];
-  public mainChartData2: Array < number > = [];
-  public mainChartData3: Array < number > = [];
-  public mainChartData4: Array < number > = [];
-  public mainChartData5: Array < number > = [];
-  public mainChartData6: Array < number > = [];
+  public mainZoneData: Array < number > = [];
+  public zoneUpperLimit: Array < number > = [];
+  public zoneLowerLimit: Array < number > = [];
 
 
 
@@ -55,75 +54,22 @@ export class BakeChartsComponent implements OnInit {
   public chartData: Array < ChartModel > = [];
   public resetChartData: Array < ChartModel > = [];
   public index = 0;
-  public mainChartData: Array < any > = [{
-      data: this.mainChartData1,
-      label: 'Zone 1'
+  public mainChartData: Array < any > = [
+    {
+      data: this.zoneUpperLimit,
+      label: 'Upper Tolerance'
     },
     {
-      data: this.mainChartData2,
-      label: 'Zone 2'
-    },
-    {
-      data: this.mainChartData3,
+      data: this.mainZoneData,
       label: 'Zone 3'
     },
+    
     {
-      data: this.mainChartData4,
-      label: 'Zone 4'
-    },
-    {
-      data: this.mainChartData5,
-      label: 'Zone 5'
-    },
-    {
-      data: this.mainChartData6,
-      label: 'Zone 6'
+      data: this.zoneLowerLimit,
+      label: 'Lower Tolerance'
     }
   ];
 
-  public mainChartDataZone1: Array < any > = [
-  {
-    data: this.mainChartData1,
-    label: 'Zone 1'
-  }
-];
-
-public mainChartDataZone2: Array < any > = [
- 
-  {
-    data: this.mainChartData2,
-    label: 'Zone 2'
-  }
-];
-public mainChartDataZone3: Array < any > = [
- 
-  {
-    data: this.mainChartData3,
-    label: 'Zone 3'
-  }
-];
-public mainChartDataZone4: Array < any > = [
- 
-  {
-    data: this.mainChartData4,
-    label: 'Zone 4'
-  }
-];
-public mainChartDataZone5: Array < any > = [
- 
-  {
-    data: this.mainChartData5,
-    label: 'Zone 5'
-  }
-];
-
-public mainChartDataZone6: Array < any > = [
- 
-  {
-    data: this.mainChartData6,
-    label: 'Zone 6'
-  }
-];
   /* tslint:enable:max-line-length */
   public mainChartOptions: any = {
     tooltips: {
@@ -174,7 +120,7 @@ public mainChartDataZone6: Array < any > = [
       }
     },
     legend: {
-      display: true
+      display: false
     }
   };
 
@@ -232,34 +178,22 @@ public mainChartDataZone6: Array < any > = [
   };
 
 
-  public mainChartColours: Array < any > = [{ // brandInfo
-      backgroundColor: 'transparent',
-      borderColor: '#0000FF',
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandSuccess
-      backgroundColor: 'transparent',
-      borderColor: '#1BE262',
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandSuccess
-      backgroundColor: 'transparent',
-      borderColor: '#DC3545', // getStyle('--primary'),
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandSuccess
-      backgroundColor: 'transparent',
-      borderColor: '#f86c6b',
-      pointHoverBackgroundColor: '#fff'
-    },
-    { // brandSuccess
-      backgroundColor: 'transparent',
-      borderColor: '#ffc107',
+  public mainChartColours: Array < any > = [
+    { // brandInfo
+      backgroundColor: hexToRgba(getStyle('--info'), 10),
+      borderColor: getStyle('--info'),
       pointHoverBackgroundColor: '#fff'
     },
     { // brandDanger
       backgroundColor: 'transparent',
-      borderColor: '#17a2b8',
+      borderColor: getStyle('--danger'),
+      pointHoverBackgroundColor: '#fff',
+      borderWidth: 1,
+      borderDash: [8, 5]
+    },
+    { // brandSuccess
+      backgroundColor: hexToRgba(getStyle('--success'), 10),
+      borderColor: getStyle('--success'),
       pointHoverBackgroundColor: '#fff'
     }
   ];
@@ -271,9 +205,6 @@ public mainChartDataZone6: Array < any > = [
   public count = true;
   ngOnInit() {
     this.getBakingTValue();
-    // setInterval(() => {
-    //   this.getBakingTValue();
-    // }, 10000000);
   }
 
   getBakingTValue() {
@@ -296,7 +227,14 @@ public mainChartDataZone6: Array < any > = [
       this.toDateTime = new Date();
     }
 
-    
+    this.dashboardService.getBakeTimeConfig().subscribe((data: BakingTimeConfig[]) => {
+      data.forEach(element => {
+        if ('1' == element.product_id) {
+          this.lowerLimit = element.t3_lower_limit;
+          this.upperLimit = element.t3_upper_limit;
+        }
+      });
+    })
     // tslint:disable-next-line:max-line-length
     this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: ChartModel[]) => {
       const ckvalidity = this.chartData === undefined ? 0 : this.chartData.length;
@@ -305,12 +243,9 @@ public mainChartDataZone6: Array < any > = [
           const chartsdate = new Date(data[index].createAt);
           const lastDate = new Date(this.chartData[this.chartData.length - 1].createAt);
           if (chartsdate > lastDate) {
-            this.mainChartData1.push(data[index].t1);
-            this.mainChartData2.push(data[index].t2);
-            this.mainChartData3.push(data[index].t3);
-            this.mainChartData4.push(data[index].t4);
-            this.mainChartData5.push(data[index].t5);
-            this.mainChartData6.push(data[index].t6);
+            this.mainZoneData.push(data[index].t3);
+            this.zoneUpperLimit.push(this.upperLimit);
+            this.zoneLowerLimit.push(this.lowerLimit);
             this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
             this.chartData.push(data[index]);
             this.mainChartElements = this.chartData.length;
@@ -319,12 +254,9 @@ public mainChartDataZone6: Array < any > = [
       } else {
         for (let index = 0; index < data.length; index++) {
           const chartsdate = new Date(data[index].createAt);
-          this.mainChartData1.push(data[index].t1);
-          this.mainChartData2.push(data[index].t2);
-          this.mainChartData3.push(data[index].t3);
-          this.mainChartData4.push(data[index].t4);
-          this.mainChartData5.push(data[index].t5);
-          this.mainChartData6.push(data[index].t6);
+          this.mainZoneData.push(data[index].t3);
+          this.zoneUpperLimit.push(this.upperLimit);
+          this.zoneLowerLimit.push(this.lowerLimit);
           this.mainChartLabels.push(this.datepipe.transform(data[index].createAt, 'M/d/yy, h:mm a'));
           this.chartData.push(data[index]);
           this.mainChartElements = this.chartData.length;
@@ -352,12 +284,9 @@ public mainChartDataZone6: Array < any > = [
 
   filterByDays(): void {
     this.chartData.length = 0;
-    this.mainChartData1.length = 0;
-    this.mainChartData2.length = 0;
-    this.mainChartData3.length = 0;
-    this.mainChartData4.length = 0;
-    this.mainChartData5.length = 0;
-    this.mainChartData6.length = 0;
+    this.mainZoneData.length = 0;
+    this.zoneUpperLimit.length = 0;
+    this.zoneLowerLimit.length = 0;
     this.mainChartLabels.length = 0;
     this.mainChartElements = 0;
     this.chart.chart.update();

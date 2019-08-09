@@ -1,0 +1,7 @@
+Create Module with routing
+--------------------------------
+ng generate module views/BakeingTimeConfig --routing --module=app
+
+Create Componant 
+-----------------
+ng g c views/BakeingTimeConfig

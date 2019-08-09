@@ -14,11 +14,10 @@ import { ExcelService } from '../../Services/Excel.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
+  styleUrls: ['./dashboard.component.scss'],
   providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
-  radioModel = '5s';
-
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   constructor(
     public datepipe: DatePipe,

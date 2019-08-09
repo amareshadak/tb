@@ -12,6 +12,14 @@ import { BakeChartsComponent } from './bake-charts/bake-charts.component';
 import { DashboardWidgetsComponent } from './dashboard-widgets/dashboard-widgets.component';
 import { GaugeChartComponent } from './gauge-chart/gauge-chart.component';
 import { GaugeChartModule } from 'angular-gauge-chart';
+// Tabs Component
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BakingTimeZoneOneComponent } from './baking-time-zone-one/baking-time-zone-one.component';
+import { BakingTimeZoneTwoComponent } from './baking-time-zone-two/baking-time-zone-two.component';
+import { BakingTimeZoneThreeComponent } from './baking-time-zone-three/baking-time-zone-three.component';
+import { BakingTimeZoneFourComponent } from './baking-time-zone-four/baking-time-zone-four.component';
+import { BakingTimeZoneFiveComponent } from './baking-time-zone-five/baking-time-zone-five.component';
+import { BakingTimeZoneSixComponent } from './baking-time-zone-six/baking-time-zone-six.component';
 
 @NgModule({
   imports: [
@@ -21,14 +29,21 @@ import { GaugeChartModule } from 'angular-gauge-chart';
     BsDropdownModule,
     ButtonsModule.forRoot(),
     CommonModule,
-    GaugeChartModule
+    GaugeChartModule,
+    TabsModule
   ],
-  declarations: [ 
-    DashboardComponent , 
-    BakeChartsComponent, 
+  declarations: [
+    DashboardComponent,
+    BakeChartsComponent,
     BakeTimeChartsComponent,
-     DashboardWidgetsComponent, 
-     GaugeChartComponent 
-    ]
+    DashboardWidgetsComponent,
+    GaugeChartComponent, 
+    BakingTimeZoneOneComponent, 
+    BakingTimeZoneTwoComponent, 
+    BakingTimeZoneThreeComponent, 
+    BakingTimeZoneFourComponent, 
+    BakingTimeZoneFiveComponent, 
+    BakingTimeZoneSixComponent
+  ]
 })
 export class DashboardModule { }

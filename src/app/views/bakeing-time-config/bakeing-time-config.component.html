@@ -1,0 +1,140 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card card-accent-success">
+        <div class="card-header">
+          <strong>Baking Time</strong> &nbsp;
+          <small>Configaration</small>
+        </div>
+        <form #f="ngForm" (ngSubmit)="submit(f)">
+          <div class="card-body">
+            <div class="row">
+              <div class="form-group col-sm-4">
+                <label><strong> Select Plant</strong></label>
+                <select [(ngModel)]="model.plant_id" required (change)="onChange()" name="plant_id" class="form-control select2" id="plantid" ngModel ngModel name="plantid" style="width: 100%;">
+                  <option *ngFor="let item of plants; let i = index" [value]="plants[i].id">
+                      {{plants[i].name}}
+                    </option>
+                </select>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="ddlProduct"><strong> Select Product</strong></label>
+                <select class="form-control" [(ngModel)]="model.product_id" (change)="updateProductName()" required name="product_id" id="ddlProduct">
+                  <option *ngFor="let item of products; let i = index" [value]="products[i].id">
+                      {{products[i].name}}
+                    </option>
+                </select>
+              </div>
+              <div class="form-group col-sm-4">
+                <label for="txtBakingTime"><strong> Baking Time </strong></label>
+                <input [(ngModel)]="model.bk_time" name="bk_time" type="number" class="form-control" id="txtBakingTime" min="0" placeholder="0">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-primary">
+                  <div class="card-header"><strong> Zone 1</strong></div>
+                  <div class="card-body">
+                    <div class="form-group col-sm-12">
+                      <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                      <input [(ngModel)]="model.t1_upper_limit" name="t1_upper_limit" type="number" class="form-control" id="txtUpperTolerance1" min="0" placeholder="0">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                      <input [(ngModel)]="model.t1_lower_limit" name="t1_lower_limit" type="number" class="form-control" id="txtLowerTolerance1" min="0" placeholder="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-info">
+                  <div class="card-header"> <strong> Zone 2</strong></div>
+                  <div class="card-body">
+                    <div class="form-group col-sm-12">
+                      <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                      <input [(ngModel)]="model.t2_upper_limit" name="t2_upper_limit" type="number" class="form-control" id="txtUpperTolerance2" min="0" placeholder="0">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                      <input [(ngModel)]="model.t2_lower_limit" name="t2_lower_limit" type="number" class="form-control" id="txtLowerTolerance2" min="0" placeholder="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-warning">
+                  <div class="card-header"><strong> Zone 3</strong></div>
+                  <div class="card-body">
+                      <div class="form-group col-sm-12">
+                          <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                          <input [(ngModel)]="model.t3_upper_limit" name="t3_upper_limit" type="number" class="form-control" id="txtUpperTolerance3" min="0" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-12">
+                          <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                          <input [(ngModel)]="model.t3_lower_limit" name="t3_lower_limit" type="number" class="form-control" id="txtLowerTolerance3" min="0" placeholder="0">
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-secondary">
+                  <div class="card-header"> <strong> Zone 4</strong></div>
+                  <div class="card-body">
+                      <div class="form-group col-sm-12">
+                          <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                          <input [(ngModel)]="model.t4_upper_limit" name="t4_upper_limit" type="number" class="form-control" id="txtUpperTolerance4" min="0" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-12">
+                          <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                          <input [(ngModel)]="model.t4_lower_limit" name="t4_lower_limit" type="number" class="form-control" id="txtLowerTolerance4" min="0" placeholder="0">
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-danger">
+                  <div class="card-header"><strong> Zone 5</strong></div>
+                  <div class="card-body">
+                      <div class="form-group col-sm-12">
+                          <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                          <input [(ngModel)]="model.t5_upper_limit" name="t5_upper_limit" type="number" class="form-control" id="txtUpperTolerance5" min="0" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-12">
+                          <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                          <input [(ngModel)]="model.t5_lower_limit" name="t5_lower_limit" type="number" class="form-control" id="txtLowerTolerance5" min="0" placeholder="0">
+                        </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="card card-accent-success">
+                  <div class="card-header"><strong> Zone 6</strong></div>
+                  <div class="card-body">
+                      <div class="form-group col-sm-12">
+                          <label for="txtUpperTolerance"><strong> Upper Tolerance</strong></label>
+                          <input [(ngModel)]="model.t6_upper_limit" name="t6_upper_limit" type="number" class="form-control" id="txtUpperTolerance6" min="0" placeholder="0">
+                        </div>
+                        <div class="form-group col-sm-12">
+                          <label for="txtLowerTolerance"><strong> Lower Tolerance</strong></label>
+                          <input [(ngModel)]="model.t6_lower_limit" name="t6_lower_limit" type="number" class="form-control" id="txtLowerTolerance6" min="0" placeholder="0">
+                        </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/.row-->
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <hr>
+              </div>
+            </div>
+            <button [disabled]="!f.valid" class="btn btn-primary float-right" type="submit">Update</button>
+            <br>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

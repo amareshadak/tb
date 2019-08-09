@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Component, OnInit, ViewChild, SecurityContext } from '@angular/core';
+import { Component, OnInit, ViewChild, SecurityContext, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
@@ -22,6 +22,8 @@ export class BakeTimeChartsComponent implements OnInit {
   radioModel = '5s';
 
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  @Input() bakeTime: any;
+
   constructor(
     public datepipe: DatePipe,
     private dashboardService: DashboardService,
@@ -141,7 +143,6 @@ export class BakeTimeChartsComponent implements OnInit {
        this.fromDateTime.setDate(date.getDate() - 180);
        this.toDateTime = new Date();
     }
-
 
     // tslint:disable-next-line:max-line-length
     this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: ChartModel[]) => {
