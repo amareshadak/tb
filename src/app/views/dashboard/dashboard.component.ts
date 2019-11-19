@@ -18,7 +18,7 @@ import { ExcelService } from '../../Services/Excel.service';
   providers: [DatePipe]
 })
 export class DashboardComponent implements OnInit {
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  @ViewChild(BaseChartDirective, { static: false }) chart: BaseChartDirective;
   constructor(
     public datepipe: DatePipe,
     private dashboardService: DashboardService,

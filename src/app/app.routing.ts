@@ -52,47 +52,47 @@ export const routes: Routes = [
     children: [
       {
         path: 'base',
-        loadChildren: './views/base/base.module#BaseModule'
+        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
       },
       {
         path: 'buttons',
-        loadChildren: './views/buttons/buttons.module#ButtonsModule'
+        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
         path: 'charts',
-        loadChildren: './views/chartjs/chartjs.module#ChartJSModule'
+        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
         path: 'timelog',
-        loadChildren: './views/timelog/timelog.module#TimeLogModule'
+        loadChildren: () => import('./views/timelog/timelog.module').then(m => m.TimeLogModule)
       },
       {
         path: 'baking-time-config',
-        loadChildren: './views/bakeing-time-config/bakeing-time-config.module#BakeingTimeConfigModule'
+        loadChildren: () => import('./views/bakeing-time-config/bakeing-time-config.module').then(m => m.BakeingTimeConfigModule)
       },
       {
         path: 'mobile-number-config',
-        loadChildren: './views/mobile-number-config/mobile-number-config.module#MobileNumberConfigModule'
+        loadChildren: () => import('./views/mobile-number-config/mobile-number-config.module').then(m => m.MobileNumberConfigModule)
       },
       {
         path: 'dashboard',
-        loadChildren: './views/dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'icons',
-        loadChildren: './views/icons/icons.module#IconsModule'
+        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
       },
       {
         path: 'notifications',
-        loadChildren: './views/notifications/notifications.module#NotificationsModule'
+        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
         path: 'theme',
-        loadChildren: './views/theme/theme.module#ThemeModule'
+        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
       },
       {
         path: 'widgets',
-        loadChildren: './views/widgets/widgets.module#WidgetsModule'
+        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },

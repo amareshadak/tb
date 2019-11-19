@@ -19,7 +19,7 @@ import { BakingTimeConfig } from '../../../models/baking-time-config';
 })
 export class BakingTimeZoneThreeComponent implements OnInit {
   radioModel = '5s';
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   lowerLimit: any;
   upperLimit: any;
   constructor(

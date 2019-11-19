@@ -21,7 +21,7 @@ import { ChartModel } from '../../../models/chart-model';
 export class BakeTimeChartsComponent implements OnInit {
   radioModel = '5s';
 
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   @Input() bakeTime: any;
 
   constructor(
