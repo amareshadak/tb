@@ -66,6 +66,15 @@ export const navItems: NavData[] = [
       text: ''
     }
   },
+  {
+    name: 'Plant',
+    url: '/plants',
+    icon: 'icon-clock',
+    badge: {
+      variant: 'info',
+      text: ''
+    }
+  },
   // {
   //   title: true,
   //   name: 'Theme'

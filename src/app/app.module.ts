@@ -45,6 +45,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { CommonModule } from '@angular/common';
 import { BakeingTimeConfigModule } from './views/bakeing-time-config/bakeing-time-config.module';
 import { MobileNumberConfigModule } from './views/mobile-number-config/mobile-number-config.module';
+import { PlantsModule } from './views/plants/plants.module';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { MobileNumberConfigModule } from './views/mobile-number-config/mobile-nu
     ChartsModule,
     BakeingTimeConfigModule,
     MobileNumberConfigModule,
+    PlantsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     ReactiveFormsModule

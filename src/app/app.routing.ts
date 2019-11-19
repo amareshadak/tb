@@ -75,6 +75,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/mobile-number-config/mobile-number-config.module').then(m => m.MobileNumberConfigModule)
       },
       {
+        path: 'plants',
+        loadChildren: () => import('./views/plants/plants.module').then(m => m.PlantsModule)
+      },
+      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },

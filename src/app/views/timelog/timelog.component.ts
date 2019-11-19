@@ -46,32 +46,32 @@ export class TimeLogComponent {
         width: 150
       },
       {
-        headerName: 'T1',
+        headerName: 'Zone 1',
         field: 't1',
         width: 90
       },
       {
-        headerName: 'T2',
+        headerName: 'Zone 2',
         field: 't2',
         width: 90
       },
       {
-        headerName: 'T3',
+        headerName: 'Zone 3',
         field: 't3',
         width: 100
       },
       {
-        headerName: 'T4',
+        headerName: 'Zone 4',
         field: 't4',
         width: 100
       },
       {
-        headerName: 'T5',
+        headerName: 'Zone 5',
         field: 't5',
         width: 100
       },
       {
-        headerName: 'T6',
+        headerName: 'Zone 6',
         field: 't6',
         width: 100
       }

@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MobileNumberConfigComponent } from './mobile-number-config.component';
 import { AuthGurad } from '../../Services/auth-gurad.service';
+import { PlantsComponent } from './plants.component';
+
 
 const routes: Routes = [
   {
-  path: '',
-  component: MobileNumberConfigComponent,
-  canActivate: [AuthGurad],
-  data: {
-    title: 'Mobile Number Configaration'
+    path: '',
+    component: PlantsComponent,
+    canActivate: [AuthGurad],
+    data: {
+      title: 'plant'
+    }
   }
-}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MobileNumberConfigRoutingModule { }
+export class PlantsRoutingModule { }
