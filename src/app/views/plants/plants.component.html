@@ -1,15 +1,95 @@
+<!-- <table class="table table-sm table-bordered">
+    <thead>
+      <tr>
+        <th>Sl No.</th>
+        <th>Plant Id</th>
+        <th>Plant Name</th>
+        <th>Plant Location</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of modelData; let i = index">
+        <td>{{i+1}}</td>
+        <td>{{item.plant_id}}</td>
+        <td>{{item.plant_name}}</td>
+        <td>{{item.plant_location}}</td>
+        <td><a href="javascript:void(0)">Edit</a></td>
+        <td><a href="javascript:void(0)">Delete</a></td>
+      </tr>
+
+    </tbody>
+  </table> -->
 <div class="animated fadeIn">
   <div class="row">
-    <div class="col-sm-12">
-      <div class="card card-accent-success">
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="card">
         <div class="card-header">
-          <strong>Baking Time</strong> &nbsp;
-          <small>Configaration</small>
+          <strong>Add or Update plant</strong> &nbsp; 
         </div>
-      
+        <!-- /.card-header -->
+        <!-- form start -->
+        <form #f="ngForm" (ngSubmit)="submit(f)">
+          <div class="card-body">
+            <div class="row">
+              <div class="form-group col-sm-12">
+                <label for="exampleInputEmail1"><strong>Plant Id</strong> </label>
+                <input class="form-control" type="text" name="master_number" placeholder="Plant Id">
+              </div>
+              <div class="form-group col-sm-12">
+                <label for="exampleInputEmail1"><strong>Plant Name</strong> </label>
+                <input class="form-control" type="text" name="master_number" placeholder="Plant Name">
+              </div>
+              <div class="form-group col-sm-12">
+                <label for="exampleInputEmail1"><strong>Plant Location</strong> </label>
+                <input class="form-control" type="text" name="master_number" placeholder="Plant Location">
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12">
+                <button [disabled]="!f.valid" class="btn btn-primary float-right" type="submit">Update</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <hr>
+              </div>
+            </div>
+            <div class="row">
+              <table class="table table-sm table-bordered">
+                <thead>
+                  <tr>
+                    <th>Sl No.</th>
+                    <th>Plant Id</th>
+                    <th>Plant Name</th>
+                    <th>Plant Location</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of modelData; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{item.plant_id}}</td>
+                    <td>{{item.plant_name}}</td>
+                    <td>{{item.plant_location}}</td>
+                    <td><a href="javascript:void(0)">Edit</a></td>
+                    <td><a href="javascript:void(0)">Delete</a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </form>
       </div>
+      <!-- /.card -->
     </div>
-    <!--/.col-->
+    <!-- /.card-body -->
   </div>
-  <!--/.row-->
+
 </div>

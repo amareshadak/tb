@@ -85,7 +85,8 @@
     "protractor": "^5.4.2",
     "ts-node": "^8.0.3",
     "tslint": "^5.14.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "webpack": "^4.41.2"
   },
   "engines": {
     "node": ">= 8.9.4",
