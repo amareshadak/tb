@@ -14,8 +14,9 @@
               <div class="form-group col-sm-6">
                 <label><strong> Select Plant</strong></label>
                 <select [(ngModel)]="model.plant_id" required (change)="onChange()" name="plant_id" class="form-control select2" id="plantid" ngModel ngModel name="plantid" style="width: 100%;">
+                  <option value=""> -----  Select Plant  ------</option>
                     <option *ngFor="let item of plants; let i = index" [value]="plants[i].id">
-                        {{plants[i].name}}
+                        {{plants[i].plant_name}}
                       </option>
                   </select>
               </div>

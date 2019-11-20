@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from '../../Services/dashboard.service';
 import { MobileNumberConfig } from '../../models/mobile-number-config';
+import { IPlant } from '../../models/plant';
+import { ApiService } from '../../Services/api.service';
 
 @Component({
   selector: 'app-mobile-number-config',
@@ -10,7 +12,7 @@ import { MobileNumberConfig } from '../../models/mobile-number-config';
 })
 export class MobileNumberConfigComponent  {
 
-  constructor(private service: DashboardService,private toastr: ToastrService) { }
+  constructor(private service: DashboardService,private toastr: ToastrService,private apiService : ApiService) { }
   model: MobileNumberConfig = {
     plant_id: '',
     master_number: '',
@@ -23,8 +25,18 @@ export class MobileNumberConfigComponent  {
   }
   // Store a copy of initial model
   initialModel = Object.assign({}, this.model);
+  plants:  IPlant[]
+  loadInitData = () => {
+    this.apiService.getAllPlants().subscribe((resultData: IPlant[]) => {
+      console.log(resultData)
+      this.plants = resultData;
+    })
+  }
 
-  
+  ngOnInit() {
+    this.loadInitData();
+  }
+
   onChange() {
     let plant_id = this.model.plant_id;
     if (this.model.plant_id != '') {
@@ -55,16 +67,16 @@ export class MobileNumberConfigComponent  {
     })
   }
   
-  plants = [
-    { id: '', name: '--- Select Plant ---' },
-    { id: '1', name: 'BARIPADA,ODISHA (SRI MAYUR BISCUIT)' },
-    // { id: '2', name: 'Taratala Plant' },
-    // { id: '3', name: 'Dhulagori Plant' },
-    // { id: '4', name: 'Kharagpur Plant' },
-    // { id: '5', name: 'Behala Plant' },
-    // { id: '6', name: 'Durgapur Plant' },
-    // { id: '7', name: 'Malda Plant' },
-    // { id: '8', name: 'Horidebpur Plant' }
-  ]
+  // plants = [
+  //   { id: '', name: '--- Select Plant ---' },
+  //   { id: '1', name: 'BARIPADA,ODISHA (SRI MAYUR BISCUIT)' },
+  //   // { id: '2', name: 'Taratala Plant' },
+  //   // { id: '3', name: 'Dhulagori Plant' },
+  //   // { id: '4', name: 'Kharagpur Plant' },
+  //   // { id: '5', name: 'Behala Plant' },
+  //   // { id: '6', name: 'Durgapur Plant' },
+  //   // { id: '7', name: 'Malda Plant' },
+  //   // { id: '8', name: 'Horidebpur Plant' }
+  // ]
 
 }

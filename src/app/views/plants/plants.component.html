@@ -1,26 +1,3 @@
-<!-- <table class="table table-sm table-bordered">
-    <thead>
-      <tr>
-        <th>Sl No.</th>
-        <th>Plant Id</th>
-        <th>Plant Name</th>
-        <th>Plant Location</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of modelData; let i = index">
-        <td>{{i+1}}</td>
-        <td>{{item.plant_id}}</td>
-        <td>{{item.plant_name}}</td>
-        <td>{{item.plant_location}}</td>
-        <td><a href="javascript:void(0)">Edit</a></td>
-        <td><a href="javascript:void(0)">Delete</a></td>
-      </tr>
-
-    </tbody>
-  </table> -->
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-md-12">
@@ -32,26 +9,25 @@
         <!-- /.card-header -->
         <!-- form start -->
         <form #f="ngForm" (ngSubmit)="submit(f)">
+       
           <div class="card-body">
             <div class="row">
               <div class="form-group col-sm-12">
                 <label for="exampleInputEmail1"><strong>Plant Id</strong> </label>
-                <input class="form-control" type="text" name="master_number" placeholder="Plant Id">
+                <input [(ngModel)]="model.plant_id" [readonly]="model.id != ''"   class="form-control" type="text" name="plant_id" placeholder="Plant Id" required>
               </div>
               <div class="form-group col-sm-12">
                 <label for="exampleInputEmail1"><strong>Plant Name</strong> </label>
-                <input class="form-control" type="text" name="master_number" placeholder="Plant Name">
+                <input [(ngModel)]="model.plant_name" class="form-control" type="text" name="plant_name" placeholder="Plant Name" required>
               </div>
               <div class="form-group col-sm-12">
                 <label for="exampleInputEmail1"><strong>Plant Location</strong> </label>
-                <input class="form-control" type="text" name="master_number" placeholder="Plant Location">
+                <input [(ngModel)]="model.plant_location" class="form-control" type="text" name="plant_location" placeholder="Plant Location" required>
               </div>
-
             </div>
-
             <div class="row">
               <div class="col-sm-12">
-                <button [disabled]="!f.valid" class="btn btn-primary float-right" type="submit">Update</button>
+                <button [disabled]="!f.valid" class="btn btn-primary float-right" type="submit">{{model.id == '' ? 'Save':'Update'}}</button>
               </div>
             </div>
             <div class="row">
@@ -68,17 +44,17 @@
                     <th>Plant Name</th>
                     <th>Plant Location</th>
                     <th>Edit</th>
-                    <th>Delete</th>
+                    <!-- <th>Delete</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of modelData; let i = index">
+                  <tr *ngFor="let item of modelData; let i = index"  class="{{(item.id==model.id ? 'selected':'')}}">
                     <td>{{i+1}}</td>
                     <td>{{item.plant_id}}</td>
                     <td>{{item.plant_name}}</td>
                     <td>{{item.plant_location}}</td>
-                    <td><a href="javascript:void(0)">Edit</a></td>
-                    <td><a href="javascript:void(0)">Delete</a></td>
+                    <td><a (click)="onEdit(item)" href="javascript:void(0)">Edit</a></td>
+                    <!-- <td><a (click)="onDelete(item)" href="javascript:void(0)">Delete</a></td> -->
                   </tr>
 
                 </tbody>
