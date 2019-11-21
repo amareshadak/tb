@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { IPlant } from '../models/plant';
+import { IUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +44,18 @@ export class ApiService {
   addOrUpdatePlant(data: any) {
     return this.http.post(`${this.Url}/plant`, data, { responseType: 'text' });
   }
+
+  addOrUpdateUser(data: IUser) {
+    return this.http.post(`${this.Url}/user`, data, { responseType: 'text' });
+  }
+
+  getAllUser() {
+    return this.http.get<IUser[]>(`${this.Url}/user`);
+  }
+
+  getUserByLoginId(data: string) {
+    return this.http.get<IUser>(`${this.Url}/user/getUserByLoginId?loginId${data}`);
+  }
+
+
 }

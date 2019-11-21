@@ -75,6 +75,16 @@ export const navItems: NavData[] = [
       text: ''
     }
   },
+
+  {
+    name: 'User',
+    url: '/user',
+    icon: 'fa fa-industry',
+    badge: {
+      variant: 'info',
+      text: ''
+    }
+  },
   // {
   //   title: true,
   //   name: 'Theme'

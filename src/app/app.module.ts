@@ -46,6 +46,7 @@ import { CommonModule } from '@angular/common';
 import { BakeingTimeConfigModule } from './views/bakeing-time-config/bakeing-time-config.module';
 import { MobileNumberConfigModule } from './views/mobile-number-config/mobile-number-config.module';
 import { PlantsModule } from './views/plants/plants.module';
+import { UserModule } from './views/user/user.module';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { PlantsModule } from './views/plants/plants.module';
     BakeingTimeConfigModule,
     MobileNumberConfigModule,
     PlantsModule,
+    UserModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
     ReactiveFormsModule

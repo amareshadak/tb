@@ -1,0 +1,99 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card">
+                <div class="card-header">
+                    <strong>Add or Update plant</strong> &nbsp;
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form #f="ngForm" (ngSubmit)="submit(f)">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="name"><strong>Name</strong> </label>
+                                <input [(ngModel)]="model.name"  class="form-control"
+                                    type="text" name="name" placeholder="name" required>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="designation"><strong>Designation</strong> </label>
+                                <input [(ngModel)]="model.designation" class="form-control" type="text"
+                                    name="designation" placeholder="designation" required>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label for="employee_id"><strong>Employee Id</strong> </label>
+                                <input [(ngModel)]="model.employee_id" class="form-control" type="text"
+                                    name="employee_id" placeholder="employee id" required>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="role"><strong>Role</strong> </label>
+                                <select [(ngModel)]="model.role" required name="role" class="form-control select2"
+                                    id="plantid" name="role" style="width: 100%;">
+                                    <option value=""> -- Select Role --</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Senior Management">Senior Management</option>
+                                    <option value="Plant Manager">Plant Manager</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="login_id"><strong>User Id</strong> </label>
+                                <input [(ngModel)]="model.login_id" [readonly]="model.id != ''" class="form-control" type="text" name="login_id"
+                                    placeholder="user id" required>
+                            </div>
+                            <div class="form-group col-sm-6" *ngIf="model.id == ''">
+                                <label for="password"><strong>Password</strong> </label>
+                                <input [(ngModel)]="model.password" class="form-control" type="password" name="password"
+                                    autocomplete="new-password" placeholder="password"  [required]="model.id == ''">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button [disabled]="!f.valid" class="btn btn-primary float-right"
+                                    type="submit">{{model.id == '' ? 'Save':'Update'}}</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sl No.</th>
+                                        <th>Name</th>
+                                        <th>Desination</th>
+                                        <th>Employee Id</th>
+                                        <th>Role</th>
+                                        <th>Edit</th>
+                                        <!-- <th>Delete</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of modelData; let i = index"
+                                        class="{{(item.id==model.id ? 'selected':'')}}">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.designation}}</td>
+                                        <td>{{item.employee_id}}</td>
+                                        <td>{{item.role}}</td>
+                                        <td><a (click)="onEdit(item)" href="javascript:void(0)">Edit</a></td>
+                                        <!-- <td><a (click)="onDelete(item)" href="javascript:void(0)">Delete</a></td> -->
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.card-body -->
+    </div>
+
+</div>
