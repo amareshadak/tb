@@ -47,6 +47,8 @@ import { BakeingTimeConfigModule } from './views/bakeing-time-config/bakeing-tim
 import { MobileNumberConfigModule } from './views/mobile-number-config/mobile-number-config.module';
 import { PlantsModule } from './views/plants/plants.module';
 import { UserModule } from './views/user/user.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -71,7 +73,7 @@ import { UserModule } from './views/user/user.module';
     UserModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    ReactiveFormsModule
+    ReactiveFormsModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   declarations: [
     AppComponent,
