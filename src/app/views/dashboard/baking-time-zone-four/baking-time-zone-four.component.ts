@@ -8,7 +8,7 @@ import { DatePipe } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ExcelService } from '../../../Services/Excel.service';
-import { ChartModel } from '../../../models/chart-model';
+import { ChartModel, ResponseChartModel } from '../../../models/chart-model';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
 import { BakingTimeConfig } from '../../../models/baking-time-config';
 
@@ -229,7 +229,8 @@ export class BakingTimeZoneFourComponent implements OnInit {
       });
     })
     // tslint:disable-next-line:max-line-length
-    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: ChartModel[]) => {
+    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((res: ResponseChartModel) => {
+      let data = res.payload;
       const ckvalidity = this.chartData === undefined ? 0 : this.chartData.length;
       if (ckvalidity > 0) {
         for (let index = 0; index < data.length; index++) {

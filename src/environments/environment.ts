@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://baketracker.com:8081/api'
+  apiUrl: 'http://baketracker.com:8082/api'
 };

@@ -1,3 +1,9 @@
+export class ResponseChartModel {
+    status: boolean;
+    message: string;
+    payload: ChartModel[];
+}
+
 export class ChartModel {
     id: string;
     t1: number;

@@ -69,7 +69,7 @@ export const navItems: NavData[] = [
   {
     name: 'Plant',
     url: '/plants',
-    icon: 'fa fa-industry',
+    icon: 'fa fa-home',
     badge: {
       variant: 'info',
       text: ''
@@ -77,9 +77,9 @@ export const navItems: NavData[] = [
   },
 
   {
-    name: 'User',
+    name: 'Users',
     url: '/user',
-    icon: 'fa fa-industry',
+    icon: 'fa fa-user',
     badge: {
       variant: 'info',
       text: ''

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../../Services/dashboard.service';
-import { ChartModel } from '../../../models/chart-model';
+import { ChartModel, ResponseChartModel } from '../../../models/chart-model';
 
 @Component({
   selector: 'app-dashboard-widgets',
@@ -15,9 +15,9 @@ export class DashboardWidgetsComponent implements OnInit {
     this.getBakingTime();
   }
   getBakingTime() {
-    this.dashboardService.getBKData().subscribe((data: ChartModel[]) => {
-      if (data.length > 0) {
-        this.currentBakingTime = data[0].bk_time;
+    this.dashboardService.getBKData().subscribe((data: ResponseChartModel) => {
+      if (data.payload.length > 0) {
+        this.currentBakingTime = data.payload[0].bk_time;
       }
     });
   }

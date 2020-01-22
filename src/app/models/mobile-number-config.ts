@@ -1,3 +1,9 @@
+export interface IResponseMobileNumberConfig {
+    status: boolean;
+    message: string;
+    payload: MobileNumberConfig[];
+}
+
 export interface MobileNumberConfig {
     plant_id: string;
     master_number: string;

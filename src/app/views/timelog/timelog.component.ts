@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../Services/dashboard.service';
-import { ChartModel } from '../../models/chart-model';
+import { ChartModel, ResponseChartModel } from '../../models/chart-model';
 import { ExcelService } from '../../Services/Excel.service';
 import { PDFService } from '../../Services/PDF.service';
 import jsPDF from 'jspdf';
@@ -92,8 +92,8 @@ export class TimeLogComponent {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.showLoadingOverlay();
-    this.dashboardService.getBKData().subscribe((result: ChartModel[]) => {
-      this.rowData = result;
+    this.dashboardService.getBKData().subscribe((result: ResponseChartModel) => {
+      this.rowData = result.payload;
       this.gridApi.hideOverlay();
     });
   }

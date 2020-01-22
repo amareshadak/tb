@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from '../../Services/dashboard.service';
-import { MobileNumberConfig } from '../../models/mobile-number-config';
-import { IPlant } from '../../models/plant';
+import { MobileNumberConfig, IResponseMobileNumberConfig } from '../../models/mobile-number-config';
+import { IPlant, IResopnseIPlant } from '../../models/plant';
 import { ApiService } from '../../Services/api.service';
 
 @Component({
@@ -27,9 +27,8 @@ export class MobileNumberConfigComponent  {
   initialModel = Object.assign({}, this.model);
   plants:  IPlant[]
   loadInitData = () => {
-    this.apiService.getAllPlants().subscribe((resultData: IPlant[]) => {
-      console.log(resultData)
-      this.plants = resultData;
+    this.apiService.getAllPlants().subscribe((resultData: IResopnseIPlant) => {
+      this.plants = resultData.payload;
     })
   }
 
@@ -40,7 +39,8 @@ export class MobileNumberConfigComponent  {
   onChange() {
     let plant_id = this.model.plant_id;
     if (this.model.plant_id != '') {
-      this.service.getMobileNumberConfig().subscribe((data: MobileNumberConfig[]) => {
+      this.service.getMobileNumberConfig().subscribe((res: IResponseMobileNumberConfig) => {
+        let data  = res.payload;
         let isSet = false;
         data.forEach(element => {
           if (this.model.plant_id == element.plant_id) {
@@ -62,6 +62,7 @@ export class MobileNumberConfigComponent  {
 
   submit = (f) => {
     this.service.addOrUpdateMobileNoConfig(this.model).subscribe((data: any) => {
+      console.log(data)
       this.onChange();
       this.toastr.success("Data saved successfully","Success")
     })

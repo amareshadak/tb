@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { PDFService } from '../../../Services/PDF.service';
 import { ExcelService } from '../../../Services/Excel.service';
 import { DashboardService } from '../../../Services/dashboard.service';
-import { ChartModel } from '../../../models/chart-model';
+import { ChartModel, ResponseChartModel } from '../../../models/chart-model';
 
 @Component({
   selector: 'app-bake-time-charts',
@@ -145,7 +145,8 @@ export class BakeTimeChartsComponent implements OnInit {
     }
 
     // tslint:disable-next-line:max-line-length
-    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((data: ChartModel[]) => {
+    this.dashboardService.getBKData(this.datepipe.transform(this.fromDateTime, 'yyyy-MM-dd_HH:mm:ss'), this.datepipe.transform(this.toDateTime, 'yyyy-MM-dd_HH:mm:ss')).subscribe((res: ResponseChartModel) => {
+      let data = res.payload;
       const ckvalidity = this.chartData === undefined ? 0 : this.chartData.length;
       if (ckvalidity > 0) {
         for (let index = 0; index < data.length; index++) {
