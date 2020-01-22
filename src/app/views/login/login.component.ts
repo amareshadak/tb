@@ -11,15 +11,20 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService
   ) { }
-    invalidLogin: boolean;
-    result: boolean;
+  invalidLogin: boolean;
+  result: boolean;
 
-    singIn(credentials) {
-      this.result = this.authService.login(credentials);
-     if (this.result) {
-     this.router.navigate(['/']);
-     } else {
-       this.invalidLogin = true;
-     }
+  singIn(credentials) {
+
+    console.log(credentials)
+
+    let data = {userId : credentials.username, password: credentials.password}
+
+    this.result = this.authService.login(data);
+    if (this.result) {
+      this.router.navigate(['/']);
+    } else {
+      this.invalidLogin = true;
+    }
   }
- }
+}
