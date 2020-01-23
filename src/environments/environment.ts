@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://baketracker.com:8082/api'
+  apiUrl: 'https://cors-anywhere.herokuapp.com/http://baketracker.com:8082/api'
 };
