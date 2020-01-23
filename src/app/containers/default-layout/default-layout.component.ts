@@ -30,7 +30,10 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.changes.disconnect();
   }
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('baketracker_token');
+    localStorage.removeItem('baketracker_username');
+    localStorage.removeItem('baketracker_name');
+    localStorage.removeItem('baketracker_role');
     this.router.navigate(['/login']);
   }
 }

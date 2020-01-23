@@ -1,6 +1,6 @@
 {
-  "short_name": "Maps",
-  "name": "Google Maps",
+  "short_name": "BT",
+  "name": "Bake Tracker",
   "icons": [
     {
       "src": "/images/icons-192.png",

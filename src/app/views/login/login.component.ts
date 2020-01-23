@@ -15,16 +15,20 @@ export class LoginComponent {
   result: boolean;
 
   singIn(credentials) {
-
-    console.log(credentials)
-
     let data = {userId : credentials.username, password: credentials.password}
-
-    this.result = this.authService.login(data);
-    if (this.result) {
-      this.router.navigate(['/']);
-    } else {
-      this.invalidLogin = true;
-    }
+    this.authService.login(data).subscribe((res: any) => {
+      if(res.status) {
+        localStorage.setItem('baketracker_token' , res.payload.token);
+        localStorage.setItem('baketracker_username' , res.payload.username);
+        localStorage.setItem('baketracker_name' , res.payload.name);
+        localStorage.setItem('baketracker_role' , res.payload.role);
+        this.router.navigate(['/']);
+      }
+      else
+      {
+        this.invalidLogin = true;
+        return false;
+      }
+    })
   }
 }
