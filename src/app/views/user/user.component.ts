@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from '../../models/user';
+import { IUser, ResponseIUser } from '../../models/user';
 import { ApiService } from '../../Services/api.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,8 +31,8 @@ export class UserComponent implements OnInit {
   }
 
   loadInitData = () => {
-    this.service.getAllUser().subscribe((resultData: IUser[]) => {
-      this.modelData = resultData;
+    this.service.getAllUser().subscribe((resultData: ResponseIUser) => {
+      this.modelData = resultData.payload;
     })
   }
 

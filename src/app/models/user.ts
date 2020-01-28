@@ -1,3 +1,9 @@
+export class ResponseIUser {
+    status: boolean;
+    message: string;
+    payload: IUser[];
+}
+
 export class IUser {
     id: string;
     name: string;

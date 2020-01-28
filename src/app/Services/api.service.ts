@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { IPlant } from '../models/plant';
-import { IUser } from '../models/user';
+import { IUser, ResponseIUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +10,23 @@ import { IUser } from '../models/user';
 
 export class ApiService {
   Url: string = environment.apiUrl;
+  headers = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("baketracker_token")}`
+    })
+  };
+
+  headersText = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("baketracker_token")}`,
+      "responseType": "text"
+    })
+  };
+  
+  
+
   constructor(private http: HttpClient) { }
 
 
@@ -30,11 +47,11 @@ export class ApiService {
   }
 
   addOrUpdateBakeTimeConfig(data: any) {
-    return this.http.post(`${this.Url}/product`, data, { responseType: 'text' });
+    return this.http.post(`${this.Url}/product`, data, this.headersText);
   }
 
   getBakeTimeConfig() {
-    return this.http.get<IPlant[]>(`${this.Url}/product`);
+    return this.http.get<IPlant[]>(`${this.Url}/product`, this.headers);
   }
 
   getAllPlants() {
@@ -50,11 +67,12 @@ export class ApiService {
   }
 
   getAllUser() {
-    return this.http.get<IUser[]>(`${this.Url}/user`);
+    console.log(this.headers);
+    return this.http.get<ResponseIUser>(`${this.Url}/user`,this.headers);
   }
 
   getUserByLoginId(data: string) {
-    return this.http.get<IUser>(`${this.Url}/user/getUserByLoginId?loginId${data}`);
+    return this.http.get<IUser>(`${this.Url}/user/getUserByLoginId?loginId${data}`,this.headers);
   }
 
 
