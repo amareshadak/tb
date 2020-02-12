@@ -49,6 +49,6 @@ getBKData(formDateTime?: string, toDateTime?: string) {
   }
 
   getBakeTimeConfig(){
-    return this.http.get(`${this.Url}/product`);
+    return this.http.get(`${this.Url}/product`,this.headers);
   }
 }

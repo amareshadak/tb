@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { BakingTimeConfig } from '../../models/baking-time-config';
+import { BakingTimeConfig, IResponseBakingTimeConfig } from '../../models/baking-time-config';
 import { DashboardService } from '../../Services/dashboard.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -45,8 +45,9 @@ export class BakeingTimeConfigComponent {
     let product_id = this.model.product_id;
     let plant_id = this.model.plant_id;
     if (this.model.product_id != '' && this.model.plant_id != '') {
-      this.service.getBakeTimeConfig().subscribe((data: BakingTimeConfig[]) => {
+      this.service.getBakeTimeConfig().subscribe((res: IResponseBakingTimeConfig) => {
         let isSet = false;
+        let data = res.payload;
         data.forEach(element => {
           if (this.model.product_id == element.product_id && this.model.plant_id == element.plant_id) {
             this.model = element;

@@ -1,3 +1,10 @@
+export interface IResponseBakingTimeConfig {
+    status: boolean;
+    message: string;
+    payload: BakingTimeConfig[];
+}
+
+
 export interface BakingTimeConfig {
     product_id: string;
     product_name: string;
