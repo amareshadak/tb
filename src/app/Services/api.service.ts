@@ -10,6 +10,7 @@ import { IUser, ResponseIUser } from '../models/user';
 
 export class ApiService {
   Url: string = environment.apiUrl;
+
   headers = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
@@ -39,11 +40,11 @@ export class ApiService {
   }
 
   addOrUpdateMobileNoConfig(data: any) {
-    return this.http.post(`${this.Url}/plant/mobile-config`, data, { responseType: 'text' });
+    return this.http.post(`${this.Url}/plant/mobile-config`, data, this.headersText);
   }
 
   getMobileNumberConfig() {
-    return this.http.get(`${this.Url}/plant/mobile-config`);
+    return this.http.get(`${this.Url}/plant/mobile-config`,this.headers);
   }
 
   addOrUpdateBakeTimeConfig(data: any) {
@@ -51,23 +52,23 @@ export class ApiService {
   }
 
   getBakeTimeConfig() {
+    console.log(this.headers)
     return this.http.get<IPlant[]>(`${this.Url}/product`, this.headers);
   }
 
   getAllPlants() {
-    return this.http.get(`${this.Url}/plant`);
+    return this.http.get(`${this.Url}/plant`,this.headers);
   }
 
   addOrUpdatePlant(data: any) {
-    return this.http.post(`${this.Url}/plant`, data, { responseType: 'text' });
+    return this.http.post(`${this.Url}/plant`, data, this.headersText);
   }
 
   addOrUpdateUser(data: IUser) {
-    return this.http.post(`${this.Url}/user`, data, { responseType: 'text' });
+    return this.http.post(`${this.Url}/user`, data, this.headersText);
   }
 
   getAllUser() {
-    console.log(this.headers);
     return this.http.get<ResponseIUser>(`${this.Url}/user`,this.headers);
   }
 

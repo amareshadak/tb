@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../Services/api.service';
-import { IPlant } from '../../models/plant';
+import { IPlant, IResopnseIPlant } from '../../models/plant';
 
 @Component({
   selector: 'app-plants',
@@ -28,8 +28,8 @@ export class PlantsComponent implements OnInit {
   }
 
   loadInitData = () => {
-    this.service.getAllPlants().subscribe((resultData: IPlant[]) => {
-      this.modelData = resultData;
+    this.service.getAllPlants().subscribe((resultData: IResopnseIPlant) => {
+      this.modelData = resultData.payload;
     })
   }
 

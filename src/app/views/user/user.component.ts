@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
 
   loadInitData = () => {
     this.service.getAllUser().subscribe((resultData: ResponseIUser) => {
+      console.log(resultData.payload)
       this.modelData = resultData.payload;
     })
   }

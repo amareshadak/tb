@@ -39,7 +39,7 @@ export class MobileNumberConfigComponent  {
   onChange() {
     let plant_id = this.model.plant_id;
     if (this.model.plant_id != '') {
-      this.service.getMobileNumberConfig().subscribe((res: IResponseMobileNumberConfig) => {
+      this.apiService.getMobileNumberConfig().subscribe((res: IResponseMobileNumberConfig) => {
         let data  = res.payload;
         let isSet = false;
         data.forEach(element => {
@@ -61,7 +61,7 @@ export class MobileNumberConfigComponent  {
   }
 
   submit = (f) => {
-    this.service.addOrUpdateMobileNoConfig(this.model).subscribe((data: any) => {
+    this.apiService.addOrUpdateMobileNoConfig(this.model).subscribe((data: any) => {
       console.log(data)
       this.onChange();
       this.toastr.success("Data saved successfully","Success")
